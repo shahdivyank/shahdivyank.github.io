@@ -1,8 +1,9 @@
 import React from 'react'
+import Footer from '../components/Footer'
 
 const Index = () => {
   return (
-    <div className="bg-red-500">Index</div>
+    <Footer />
   )
 }
 
