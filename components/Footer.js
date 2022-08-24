@@ -4,9 +4,9 @@ import Wave from 'react-wavify'
 
 const Footer = () => {
     return (
-        <div className="w-full flex justify-center items-center flex-col">
-            <Wave fill='black'
-                className='fill-black'
+        <div className="w-full flex justify-center items-center flex-col bg-orange-500">
+            <Wave fill=''
+                className='fill-sky-900 z-20'
                 paused={false}
                 options={{
                     height: 20,
@@ -15,13 +15,13 @@ const Footer = () => {
                     points: 3
                 }}
             />
-            <div className='w-full bg-black flex justify-center items-center'>
+            <div className='w-full h-40 z-10 bg-sky-900 flex justify-center items-center'>
             <div className="w-1/2 text-white flex justify-evenly items-center text-5xl p-5">
-                    <FaGithub />
-                    <FaInstagram />
-                    <FaLinkedinIn />
-                    <FaEnvelope />
-                    <FaFileAlt />
+                    <FaGithub className='hover:text-gray-300 cursor-pointer'/>
+                    <FaInstagram className='hover:text-gray-300 cursor-pointer'/>
+                    <FaLinkedinIn className='hover:text-gray-300 cursor-pointer'/>
+                    <FaEnvelope className='hover:text-gray-300 cursor-pointer'/>
+                    <FaFileAlt className='hover:text-gray-300 cursor-pointer'/>
                 </div>
             </div>
 
