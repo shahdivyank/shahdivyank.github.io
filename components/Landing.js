@@ -1,4 +1,7 @@
 import React from 'react'
+import { Row, Col } from "react-bootstrap"
+import { FaGithub, FaInstagram, FaLinkedinIn, FaEnvelope, FaFileAlt } from "react-icons/fa"
+
 
 const Landing = () => {
 
@@ -24,7 +27,24 @@ const Landing = () => {
                 ))
             }
 
-            <p className = "font-lexend text-6xl text-center text-white">Divyank Shah<br/><p className='text-3xl mt-3'>Aspiring Software Engineer</p></p>
+            <Row className='flex justify-center items-center'>
+                <Col lg={6} className="flex justify-center items-center flex-col">
+                    <p className="font-lexend text-6xl text-center text-white">Divyank Shah<br /><p className='text-3xl mt-3'>Aspiring Software Engineer</p></p>
+                    <div className="w-full text-white flex justify-evenly items-center text-5xl">
+                        <FaGithub className='hover:text-gray-300 cursor-pointer' />
+                        <FaInstagram className='hover:text-gray-300 cursor-pointer' />
+                        <FaLinkedinIn className='hover:text-gray-300 cursor-pointer' />
+                        <FaEnvelope className='hover:text-gray-300 cursor-pointer' />
+                        <FaFileAlt className='hover:text-gray-300 cursor-pointer' />
+                    </div>
+                </Col>
+                <Col lg={6} className="flex justify-center items-center">
+                    <img className="w-4/6 rounded-lg z-10" src="profile.jpg" />
+
+                </Col>
+
+            </Row>
+
 
 
         </div>
