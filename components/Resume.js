@@ -2,8 +2,18 @@ import React from 'react'
 import { Row, Col } from "react-bootstrap"
 
 const Resume = () => {
+
+    // const stars = new Array(100).fill(0)
     return (
         <section id="resume" className="flex justify-center items-center font-lexend flex-col -z-20 bg-gradient-to-b from-purple-500 to-purple-300 ">
+            {/* {
+                stars.map((star, index) => (
+                    <span style={{ top: (Math.random() * 100).toString() + "%", left: (Math.random() * 100).toString() + "%" }}
+                        key={index}
+                        className="absolute animate-pulse bg-white h-1 w-1 rounded-full"></span>
+                ))
+            } */}
+
             <p className="text-6xl">Summary</p>
 
             <Row className=" w-11/12">
