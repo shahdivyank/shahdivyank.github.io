@@ -4,7 +4,10 @@ import Wave from 'react-wavify'
 
 const Footer = () => {
     return (
-        <div className="w-full flex justify-center items-center flex-col bg-orange-500">
+        <div className="w-full flex relative justify-center items-center flex-col bg-orange-500">
+
+            <div className = "bg-white h-60 w-60 absolute top-0 left-1/2 -translate-x-1/2  -translate-y-1/2 rounded-full"></div>
+
             <Wave fill=''
                 className='fill-sky-900 z-20'
                 paused={false}
