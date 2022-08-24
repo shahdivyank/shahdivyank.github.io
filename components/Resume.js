@@ -3,22 +3,22 @@ import { Row, Col } from "react-bootstrap"
 
 const Resume = () => {
     return (
-        <section id="resume" className="flex justify-center items-center font-lexend flex-col -z-20 bg-gradient-to-b from-purple-300 to-orange-300 ">
-            <p className="text-6xl">Resume</p>
+        <section id="resume" className="flex justify-center items-center font-lexend flex-col -z-20 bg-gradient-to-b from-purple-500 to-purple-300 ">
+            <p className="text-6xl">Summary</p>
 
             <Row className=" w-11/12">
                 <Col xl={6} className="">
 
-                    <p className='text-3xl'>Education</p>
+                    <p className='text-3xl m-0 p-0'>Education</p>
                     Bachelor of Science in Computer Science at University of California, Riverside,
-                    <p className="text-3xl">Relevant Coursework</p>
+                    <p className="text-3xl m-0 p-0">Relevant Coursework</p>
                     <div className="flex justify-evenly items-center">
-                        Data Structures, Discrete Mathematics, Embedded Systems, Machine Organization, Software Construction, Linear Algebra, Calculus II, Logic Design,
+                        Data Structures, Discrete Mathematics, Embedded Systems, Machine Organization, Software Construction, Linear Algebra, Calculus II, Logic Design
                     </div>
                 </Col>
                 <Col xl={6} className="">
                     <div>
-                        <p className="text-3xl">Technical Skills</p>
+                        <p className="text-3xl m-0 p-0">Technical Skills</p>
                         Python,
                         C++,
                         Javascript,
@@ -28,7 +28,7 @@ const Resume = () => {
                         Go
                     </div>
                     <div>
-                        <p className="text-3xl">Developer Tools</p>
+                        <p className="text-3xl m-0 p-0">Developer Tools</p>
                         VS Code,
                         PyCharm,
                         Git & Github,
@@ -39,7 +39,7 @@ const Resume = () => {
                         Concourse
                     </div>
                     <div>
-                        <p className="text-3xl">Technologies and Framworks</p>
+                        <p className="text-3xl m-0 p-0">Technologies and Framworks</p>
                         React,
                         Next.js,
                         QT Creator,
@@ -47,7 +47,7 @@ const Resume = () => {
                         AWS DynamoDB,
                         AWS Lambda Step Functions,
                         Tailwind,
-                        GraphQL,
+                        GraphQL
                     </div>
                 </Col>
             </Row>

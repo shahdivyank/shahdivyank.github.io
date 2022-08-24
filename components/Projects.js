@@ -69,7 +69,7 @@ const Projects = () => {
             <Row className = "w-11/12">
                 {
                     projects.map((project, index) => (
-                        <Col key={index} xl = {3} lg = {4} sm = {6} className = "p-3 ">
+                        <Col key={index} xl = {3} lg = {4} sm = {6} className = " p-3 border-x border-black">
                             <Project title={project.title} description={project.description} github={project.github} deployed={project.deployed} built = {project.built}/>
                         </Col>
                     ))

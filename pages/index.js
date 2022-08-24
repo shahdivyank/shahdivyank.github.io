@@ -1,4 +1,5 @@
 import React from 'react'
+import Experiences from '../components/Experiences'
 import Footer from '../components/Footer'
 import Landing from '../components/Landing'
 import Navigation from '../components/Navigation'
@@ -13,6 +14,7 @@ const Index = () => {
             <Navigation />
             <Landing />
             <Resume />
+            <Experiences />
             <Projects/>
             <Workshops />
             <Footer />
