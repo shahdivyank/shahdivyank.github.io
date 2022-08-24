@@ -4,7 +4,7 @@ import Footer from '../components/Footer'
 import Landing from '../components/Landing'
 import Navigation from '../components/Navigation'
 import Projects from '../components/Projects'
-import Resume from '../components/Resume'
+import About from '../components/About'
 import Workshops from '../components/Workshops'
 
 const Index = () => {
@@ -13,7 +13,7 @@ const Index = () => {
         <>
             <Navigation />
             <Landing />
-            <Resume />
+            <About />
             <Experiences />
             <Projects/>
             <Workshops />

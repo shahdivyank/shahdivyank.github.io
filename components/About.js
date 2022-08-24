@@ -1,11 +1,11 @@
 import React from 'react'
 import { Row, Col } from "react-bootstrap"
 
-const Resume = () => {
+const About = () => {
 
     // const stars = new Array(100).fill(0)
     return (
-        <section id="resume" className="flex justify-center items-center font-lexend flex-col -z-20 bg-gradient-to-b from-purple-500 to-purple-300 ">
+        <section id="about" className="flex justify-center items-center font-lexend flex-col -z-20 bg-gradient-to-b from-purple-500 to-purple-300 ">
             {/* {
                 stars.map((star, index) => (
                     <span style={{ top: (Math.random() * 100).toString() + "%", left: (Math.random() * 100).toString() + "%" }}
@@ -14,7 +14,7 @@ const Resume = () => {
                 ))
             } */}
 
-            <p className="text-6xl">Summary</p>
+            <p className="text-6xl">About Me</p>
 
             <Row className=" w-11/12">
                 <Col xl={6} className="">
@@ -65,4 +65,4 @@ const Resume = () => {
     )
 }
 
-export default Resume
+export default About
