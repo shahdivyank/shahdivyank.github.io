@@ -4,6 +4,7 @@ import Landing from '../components/Landing'
 import Navigation from '../components/Navigation'
 import Projects from '../components/Projects'
 import Resume from '../components/Resume'
+import Workshops from '../components/Workshops'
 
 const Index = () => {
     return (
@@ -13,6 +14,7 @@ const Index = () => {
             <Landing />
             <Resume />
             <Projects/>
+            <Workshops />
             <Footer />
         </>
 

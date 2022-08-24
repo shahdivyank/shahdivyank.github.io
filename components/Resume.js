@@ -3,7 +3,7 @@ import { Row, Col } from "react-bootstrap"
 
 const Resume = () => {
     return (
-        <section id="resume" className="flex justify-center items-center font-lexend flex-col bg-gradient-to-b -z-20 from-orange-300 to-amber-300 ">
+        <section id="resume" className="flex justify-center items-center font-lexend flex-col -z-20 bg-gradient-to-b from-purple-300 to-orange-300 ">
             <p className="text-6xl">Resume</p>
 
             <Row className=" w-11/12">
