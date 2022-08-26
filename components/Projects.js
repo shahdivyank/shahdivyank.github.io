@@ -67,8 +67,8 @@ const Projects = () => {
 
 
     return (
-        <section id="projects" className="font-lexend relative flex justify-center items-center flex-col bg-gradient-to-b z-20 bg-gradient-to-b  from-orange-300 to-amber-300 ">
-            <p className = "text-6xl mt-16 mb-8">Projects</p>
+        <section id="projects" className="font-lexend pb-20 relative flex justify-center items-center flex-col bg-gradient-to-b z-20 bg-gradient-to-b  from-orange-300 to-amber-300 ">
+            <p className = "text-6xl">Projects</p>
             <Row className = "w-11/12">
                 {
                     projects.map((project, index) => (

@@ -50,20 +50,20 @@ const experiences = [
 
 const Experiences = () => {
     return (
-        <section className="font-lexend flex justify-center items-center flex-col bg-gradient-to-b from-purple-300 to-orange-300">
+        <section className="font-lexend pb-20 flex justify-center items-center flex-col bg-gradient-to-b from-purple-300 to-orange-300">
             <p className="text-6xl">Experiences</p>
             <Row className="w-11/12">
                 {
                     experiences.map((experience, index) => (
                         <Col xl={12} key={index} className="flex justify-between flex-col">
                             <div className="flex justify-between w-full">
-                                <p><p className="text-3xl">{experience.company}</p>{experience.role}</p>
-                                <p>{experience.time}<br />{experience.location}</p>
+                                <p className="text-xl"><p className="text-3xl">{experience.company}</p>{experience.role}</p>
+                                <p className= "text-xl">{experience.time}<br />{experience.location}</p>
                             </div>
                             <ul className="list-disc">
                                 {
                                     experience.points.map((point, index) => (
-                                        <li key={index}>{point}</li>
+                                        <li className = "text-xl" key={index}>{point}</li>
                                     ))
                                 }
                             </ul>
@@ -72,9 +72,6 @@ const Experiences = () => {
 
                 }
             </Row>
-
-
-
         </section>
     )
 }
