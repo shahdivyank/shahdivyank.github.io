@@ -36,7 +36,7 @@ const Landing = () => {
   return (
     <div
       style={{ height: "100vh" }}
-      className="relative flex justify-center items-center bg-gradient-to-b from-sky-900 to-purple-500 "
+      className="relative pb-20 flex justify-center items-center bg-gradient-to-b from-sky-900 to-purple-500 "
     >
       {largeStars.map((star, index) => (
         <span

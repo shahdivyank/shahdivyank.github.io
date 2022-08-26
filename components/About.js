@@ -11,7 +11,7 @@ const About = () => {
 
       <Row className=" w-11/12">
         <Col xl={12} className="flex justify-center items-center">
-          <p className="text-center text-2xl">
+          <p className="text-center text-2xl mb-5">
             Hello there! I am an incoming junior at the University of
             California, Riverside. Currently I am working with Comcast as a part
             time employee working with a Dev Ops team to manage various incoming
