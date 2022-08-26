@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "eslint": "eslint --ext .js --ext .jsx --ext .ts --ext .tsx",
+    "eslint": "eslint . --ext .js --ext .jsx --ext .ts --ext .tsx",
     "format": "prettier --write .",
     "check": "prettier --check ."
   },

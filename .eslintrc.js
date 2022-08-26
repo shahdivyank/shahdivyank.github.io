@@ -10,10 +10,13 @@ module.exports = {
     sourceType: "module",
   },
   plugins: ["react"],
-  rules: {},
+  rules: {
+    "require-jsdoc" : "off",
+    "react/react-in-jsx-scope" : "off"
+  },
   settings: {
     react: {
-      version: "latest",
+      version: "detect",
     },
   },
 };

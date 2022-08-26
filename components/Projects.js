@@ -1,7 +1,6 @@
 import React from "react";
 import { Row, Col } from "react-bootstrap";
 import Project from "./Project";
-import { SiCplusplus } from "react-icons/si";
 
 const projects = [
   {

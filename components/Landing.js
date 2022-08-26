@@ -20,7 +20,7 @@ const createStars = (starsToCreate) => {
 };
 
 const Landing = () => {
-  const [shooting_stars, setShootingStars] = useState([]);
+  const [shootingStars, setShootingStars] = useState([]);
 
   const largeStars = useMemo(() => createStars(250), []);
   const smallStars = useMemo(() => createStars(250), []);
@@ -52,7 +52,7 @@ const Landing = () => {
           className="absolute animate-twinkling-star bg-white h-1 w-1 rounded-full"
         ></span>
       ))}
-      {shooting_stars.map((star, index) => (
+      {shootingStars.map((star, index) => (
         <div
           key={index}
           className="absolute"
