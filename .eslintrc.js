@@ -11,8 +11,8 @@ module.exports = {
   },
   plugins: ["react"],
   rules: {
-    "require-jsdoc" : "off",
-    "react/react-in-jsx-scope" : "off"
+    "require-jsdoc": "off",
+    "react/react-in-jsx-scope": "off",
   },
   settings: {
     react: {

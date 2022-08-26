@@ -1,5 +1,5 @@
 import React from "react";
-import PropTypes from "prop-types"
+import PropTypes from "prop-types";
 import { FaGithub, FaRocket } from "react-icons/fa";
 
 const Project = ({ title, description, github, deployed, built }) => {
@@ -36,11 +36,11 @@ const Project = ({ title, description, github, deployed, built }) => {
 };
 
 Project.propTypes = {
-    title: PropTypes.string,
-    description: PropTypes.string,
-    github: PropTypes.string,
-    deployed: PropTypes.string,
-    built: PropTypes.string,
-}
+  title: PropTypes.string,
+  description: PropTypes.string,
+  github: PropTypes.string,
+  deployed: PropTypes.string,
+  built: PropTypes.string,
+};
 
 export default Project;
