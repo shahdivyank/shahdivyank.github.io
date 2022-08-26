@@ -1,26 +1,24 @@
-import React from 'react'
-import Experiences from '../components/Experiences'
-import Footer from '../components/Footer'
-import Landing from '../components/Landing'
-import Navigation from '../components/Navigation'
-import Projects from '../components/Projects'
-import About from '../components/About'
-import Workshops from '../components/Workshops'
+import React from "react";
+import Experiences from "../components/Experiences";
+import Footer from "../components/Footer";
+import Landing from "../components/Landing";
+import Navigation from "../components/Navigation";
+import Projects from "../components/Projects";
+import About from "../components/About";
+import Workshops from "../components/Workshops";
 
 const Index = () => {
-    return (
+  return (
+    <>
+      <Navigation />
+      <Landing />
+      <About />
+      <Experiences />
+      <Projects />
+      <Workshops />
+      <Footer />
+    </>
+  );
+};
 
-        <>
-            <Navigation />
-            <Landing />
-            <About />
-            <Experiences />
-            <Projects/>
-            <Workshops />
-            <Footer />
-        </>
-
-    )
-}
-
-export default Index
+export default Index;
