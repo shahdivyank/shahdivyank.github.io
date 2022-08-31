@@ -12,7 +12,7 @@ const workshops = [
     date: new Date(2022, 6, 2),
   },
   {
-    name: "React.js",
+    name: "React JS",
     subtitle: "Web Dev Project Series",
     sponsor: "ACM @ UCR",
     date: new Date(2022, 6, 9),

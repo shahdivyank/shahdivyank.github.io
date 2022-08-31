@@ -83,7 +83,7 @@ const Projects = () => {
             xl={3}
             lg={4}
             sm={6}
-            className=" p-3 border-x border-black"
+            className=" p-3 border-1 border-black"
           >
             <Project
               title={project.title}
