@@ -5,7 +5,6 @@ import PropTypes from "prop-types";
 const Workshop = ({ name, subtitle, sponsor, date }) => {
   return (
     <Col
-      // xl={2}
       lg={3}
       md={4}
       xs={6}
