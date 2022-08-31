@@ -26,11 +26,49 @@ const Footer = () => {
       />
       <div className="w-full h-40 z-10 bg-sky-900 flex justify-center items-center">
         <div className="w-1/2 text-white flex justify-evenly items-center text-5xl p-5">
-          <FaGithub className="hover:text-gray-300 cursor-pointer" />
-          <FaInstagram className="hover:text-gray-300 cursor-pointer" />
-          <FaLinkedinIn className="hover:text-gray-300 cursor-pointer" />
-          <FaEnvelope className="hover:text-gray-300 cursor-pointer" />
-          <FaFileAlt className="hover:text-gray-300 cursor-pointer" />
+          <a
+            href="https://github.com/shahdivyank"
+            target="_blank"
+            className="text-white hover:!text-gray-300 cursor-pointer"
+            rel="noreferrer"
+          >
+            <FaGithub />
+          </a>
+
+          <a
+            href="https://www.instagram.com/divyank.shah/"
+            target="_blank"
+            className="text-white hover:!text-gray-300 cursor-pointer"
+            rel="noreferrer"
+          >
+            <FaInstagram />
+          </a>
+
+          <a
+            href="https://www.linkedin.com/in/divyank-shah/"
+            target="_blank"
+            className="text-white hover:!text-gray-300 cursor-pointer"
+            rel="noreferrer"
+          >
+            <FaLinkedinIn />
+          </a>
+
+          <a
+            href="mailto:shahdivyank25@gmail.com"
+            target="_blank"
+            className="text-white hover:!text-gray-300 cursor-pointer"
+            rel="noreferrer"
+          >
+            <FaEnvelope />
+          </a>
+          <a
+            href="shahdivyank_resume_2022.pdf"
+            target="_blank"
+            className="text-white hover:!text-gray-300 cursor-pointer"
+            rel="noreferrer"
+          >
+            <FaFileAlt />
+          </a>
         </div>
       </div>
     </div>

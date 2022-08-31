@@ -70,12 +70,50 @@ const Landing = () => {
               <br />
               <p className="text-3xl mt-3">Aspiring Software Engineer</p>
             </p>
-            <div className="w-full text-white flex justify-evenly items-center text-5xl">
-              <FaGithub className="hover:text-gray-300 cursor-pointer" />
-              <FaInstagram className="hover:text-gray-300 cursor-pointer" />
-              <FaLinkedinIn className="hover:text-gray-300 cursor-pointer" />
-              <FaEnvelope className="hover:text-gray-300 cursor-pointer" />
-              <FaFileAlt className="hover:text-gray-300 cursor-pointer" />
+            <div className="w-full flex justify-evenly items-center text-5xl">
+              <a
+                href="https://github.com/shahdivyank"
+                target="_blank"
+                className="text-white hover:!text-gray-300 cursor-pointer"
+                rel="noreferrer"
+              >
+                <FaGithub />
+              </a>
+
+              <a
+                href="https://www.instagram.com/divyank.shah/"
+                target="_blank"
+                className="text-white hover:!text-gray-300 cursor-pointer"
+                rel="noreferrer"
+              >
+                <FaInstagram />
+              </a>
+
+              <a
+                href="https://www.linkedin.com/in/divyank-shah/"
+                target="_blank"
+                className="text-white hover:!text-gray-300 cursor-pointer"
+                rel="noreferrer"
+              >
+                <FaLinkedinIn />
+              </a>
+
+              <a
+                href="mailto:shahdivyank25@gmail.com"
+                target="_blank"
+                className="text-white hover:!text-gray-300 cursor-pointer"
+                rel="noreferrer"
+              >
+                <FaEnvelope />
+              </a>
+              <a
+                href="shahdivyank_resume_2022.pdf"
+                target="_blank"
+                className="text-white hover:!text-gray-300 cursor-pointer"
+                rel="noreferrer"
+              >
+                <FaFileAlt />
+              </a>
             </div>
           </Col>
         </Row>
