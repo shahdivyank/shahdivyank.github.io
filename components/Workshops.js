@@ -11,13 +11,13 @@ const Workshops = () => {
     >
       <p className="text-6xl">Workshops</p>
 
-      <p className="text-center text-2xl mb-5 w-11/12">
+      <p className="text-center text-xl mb-5 w-11/12">
         This is just a short preview of the various workshops I have hosted as
         well as workshops I will be hosting for various hackathons, student
         organizations and personally! I always look for various opporunties to
         spread technical education and learn along the process!
       </p>
-      <Row className="flex justify-center items-center">
+      <Row className="flex justify-center items-center w-11/12">
         {workshops.map((workshop, index) => (
           <Workshop
             key={index}

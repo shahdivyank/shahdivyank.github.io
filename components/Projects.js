@@ -22,7 +22,7 @@ const projects = [
   {
     title: "Solar Car Dashboard",
     description:
-      "Wizard Chess brings to life J.K Rowling's invention. Players move pieces using voice commands and the chess board automatically moves the pieces.",
+      "Driver dashboard GUI to be implemented on Raspberry Pi with external display to show driver critical information.",
     github: "https://github.com/UCR-Solar-Car/DriverInterface",
     deployed: "",
     built: "C++, QT Creator",
@@ -30,7 +30,7 @@ const projects = [
   {
     title: "ACM @ UCR Website",
     description:
-      "Wizard Chess brings to life J.K Rowling's invention. Players move pieces using voice commands and the chess board automatically moves the pieces.",
+      "Official website of ACM @ UCR to showcase various events, projects, workshops hosted. Acted as project lead and built events page.",
     github: "https://github.com/acm-ucr/acm-dev",
     deployed: "",
     built: "Next.js, Tailwind",
@@ -38,7 +38,7 @@ const projects = [
   {
     title: "Rose Hack Website",
     description:
-      "Wizard Chess brings to life J.K Rowling's invention. Players move pieces using voice commands and the chess board automatically moves the pieces.",
+      "Website to manage 500+ partipants and provide admin with live statistics. Ability for users to create profiles and teams to facilitate hackathon experience.",
     github: "https://github.com/Rose-Hacks/rosehack2023",
     deployed: "",
     built: "Next.js, Typescript, Tailwind, AWS DynamoDB",
@@ -83,7 +83,7 @@ const Projects = () => {
             xl={3}
             lg={4}
             sm={6}
-            className=" p-3 border-x border-black"
+            className=" p-3 border-1 border-black"
           >
             <Project
               title={project.title}

@@ -75,7 +75,7 @@ const Experiences = () => {
             </div>
             <ul className="list-disc">
               {experience.points.map((point, index) => (
-                <li className="text-xl" key={index}>
+                <li className="text-base" key={index}>
                   {point}
                 </li>
               ))}

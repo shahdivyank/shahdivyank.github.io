@@ -4,23 +4,22 @@ import PropTypes from "prop-types";
 
 const Workshop = ({ name, subtitle, sponsor, date }) => {
   return (
-    <Col
-      xl={2}
-      className={`border-2 ${
-        date > new Date() ? "text-black" : "text-gray-600"
-      } ${
-        date > new Date() ? "border-black" : "border-gray-600"
-      } rounded m-1 font-lexend`}
-    >
-      <p className="text-lg text-center">
-        {name}
-        <br />
-        <div className="text-sm">
-          {subtitle}
+    <Col lg={3} md={4} xs={6} className="font-lexend p-1">
+      <div
+        className={`rounded ${
+          date > new Date() ? "text-black" : "text-gray-600"
+        } ${date > new Date() ? "border-black" : "border-gray-600"}`}
+      >
+        <p className="text-2xl text-center">
+          {name}
           <br />
-          {sponsor} - {date.toLocaleDateString()}
-        </div>
-      </p>
+          <div className="text-base">
+            {subtitle}
+            <br />
+            {sponsor} - {date.toLocaleDateString()}
+          </div>
+        </p>
+      </div>
     </Col>
   );
 };

@@ -6,8 +6,8 @@ const Project = ({ title, description, github, deployed, built }) => {
   return (
     <div className="flex justify-center items-center flex-col ">
       <p className="text-2xl text-center m-0 p-0">{title}</p>
-      <p className="text-center text-md">{built}</p>
-      <p className="text-xl text-center">{description}</p>
+      <p className="text-center text-base">{built}</p>
+      <p className="text-base text-center">{description}</p>
       <div className="w-1/2 flex justify-evenly items-center">
         <a
           href={github}
