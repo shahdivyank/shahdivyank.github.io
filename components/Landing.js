@@ -65,7 +65,7 @@ const Landing = () => {
         ))}
         <Row className="flex justify-center items-center">
           <Col lg={12} className="flex justify-center items-center flex-col">
-            <p className="font-lexend text-6xl text-center text-white">
+            <p className="font-lexend text-8xl text-center text-white">
               Divyank Shah
               <br />
               <p className="text-3xl mt-3">Aspiring Software Engineer</p>

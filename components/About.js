@@ -11,7 +11,7 @@ const About = () => {
 
       <Row className=" w-11/12">
         <Col xl={12} className="flex justify-center items-center">
-          <p className="text-center text-2xl mb-5">
+          <p className="text-center text-xl mb-5">
             Hello there! I am an incoming junior at the University of
             California, Riverside. Currently I am working with Comcast as a part
             time employee working with a Dev Ops team to manage various incoming
@@ -23,14 +23,14 @@ const About = () => {
           </p>
         </Col>
         <Col xl={6} className="">
-          <p className="text-3xl m-0 p-0">Education</p>
-          <p className="text-xl">
+          <p className="text-2xl m-0 p-0">Education</p>
+          <p className="text-base">
             Bachelor of Science in Computer Science at University of California,
             Riverside
           </p>
-          <p className="text-3xl m-0 p-0">Relevant Coursework</p>
+          <p className="text-2xl m-0 p-0">Relevant Coursework</p>
           <div className="flex justify-evenly items-center">
-            <p className="text-xl">
+            <p className="text-base">
               Data Structures, Discrete Mathematics, Embedded Systems, Machine
               Organization, Software Construction, Linear Algebra, Calculus II,
               Logic Design
@@ -39,21 +39,21 @@ const About = () => {
         </Col>
         <Col xl={6} className="">
           <div>
-            <p className="text-3xl m-0 p-0">Technical Skills</p>
-            <p className="text-xl">
+            <p className="text-2xl m-0 p-0">Technical Skills</p>
+            <p className="text-base">
               Python, C++, Javascript, Typescript, HTML, CSS, Go
             </p>
           </div>
           <div>
-            <p className="text-3xl m-0 p-0">Developer Tools</p>
-            <p className="text-xl">
+            <p className="text-2xl m-0 p-0">Developer Tools</p>
+            <p className="text-base">
               VS Code, PyCharm, Git & Github, PyTest, GTest, QMake, CMake,
               Concourse
             </p>
           </div>
           <div>
-            <p className="text-3xl m-0 p-0">Technologies and Framworks</p>
-            <p className="text-xl">
+            <p className="text-2xl m-0 p-0">Technologies and Framworks</p>
+            <p className="text-base">
               React, Next.js, QT Creator, Firebase, AWS DynamoDB, AWS Lambda
               Step Functions, Tailwind, GraphQL
             </p>
