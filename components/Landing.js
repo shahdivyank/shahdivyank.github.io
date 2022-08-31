@@ -63,7 +63,7 @@ const Landing = () => {
         </div>
       ))}
       <Row className="flex justify-center items-center">
-        <Col lg={6} className="flex justify-center items-center flex-col">
+        <Col lg={12} className="flex justify-center items-center flex-col">
           <p className="font-lexend text-6xl text-center text-white">
             Divyank Shah
             <br />
@@ -77,9 +77,9 @@ const Landing = () => {
             <FaFileAlt className="hover:text-gray-300 cursor-pointer" />
           </div>
         </Col>
-        <Col lg={6} className="flex justify-center items-center">
+        {/* <Col lg={6} className="flex justify-center items-center">
           <img className="w-4/6 rounded-lg z-10" src="profile.jpg" />
-        </Col>
+        </Col> */}
       </Row>
     </div>
   );
