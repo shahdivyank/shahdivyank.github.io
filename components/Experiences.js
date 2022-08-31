@@ -54,7 +54,10 @@ const experiences = [
 
 const Experiences = () => {
   return (
-    <section className="font-lexend pb-20 flex justify-center items-center flex-col bg-gradient-to-b from-purple-300 to-orange-300">
+    <section
+      id="experiences"
+      className="font-lexend pb-20 flex justify-center items-center flex-col bg-gradient-to-b from-purple-300 to-orange-300"
+    >
       <p className="text-6xl">Experiences</p>
       <Row className="w-11/12">
         {experiences.map((experience, index) => (

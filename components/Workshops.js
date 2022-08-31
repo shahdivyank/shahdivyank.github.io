@@ -6,7 +6,7 @@ import { Row } from "react-bootstrap";
 const Workshops = () => {
   return (
     <section
-      id="projects"
+      id="workshops"
       className="font-lexend pb-20 relative flex justify-center items-center flex-col bg-gradient-to-b to-orange-500 from-amber-300 "
     >
       <p className="text-6xl">Workshops</p>
