@@ -15,7 +15,7 @@ const Footer = () => {
 
       <Wave
         fill=""
-        className="fill-sky-900"
+        className="fill-sky-900 z-20"
         paused={false}
         options={{
           height: 20,
@@ -24,7 +24,7 @@ const Footer = () => {
           points: 3,
         }}
       />
-      <div className="w-full -m-0.5 h-40 bg-sky-900 flex justify-center items-center">
+      <div className="w-full -mt-0.5 h-40 bg-sky-900 flex justify-center items-center">
         <div className="w-1/2 text-white flex justify-evenly items-center text-5xl p-5">
           <a
             href="https://github.com/shahdivyank"
