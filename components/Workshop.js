@@ -5,12 +5,15 @@ import PropTypes from "prop-types";
 const Workshop = ({ name, subtitle, sponsor, date }) => {
   return (
     <Col
-      xl={2}
+      // xl={2}
+      lg={3}
+      md={4}
+      xs={6}
       className={`border-2 ${
         date > new Date() ? "text-black" : "text-gray-600"
       } ${
         date > new Date() ? "border-black" : "border-gray-600"
-      } rounded m-1 font-lexend`}
+      } rounded font-lexend `}
     >
       <p className="text-lg text-center">
         {name}

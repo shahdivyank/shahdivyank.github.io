@@ -17,7 +17,7 @@ const Workshops = () => {
         organizations and personally! I always look for various opporunties to
         spread technical education and learn along the process!
       </p>
-      <Row className="flex justify-center items-center">
+      <Row className="flex justify-center items-center w-11/12">
         {workshops.map((workshop, index) => (
           <Workshop
             key={index}
