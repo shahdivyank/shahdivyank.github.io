@@ -25,7 +25,7 @@ const Footer = () => {
         }}
       />
       <div className="w-full -mt-0.5 h-40 bg-sky-900 flex justify-center items-center">
-        <div className="w-1/2 text-white flex justify-evenly items-center text-5xl p-5">
+        <div className="w-full sm:w-1/2 text-white flex justify-evenly items-center text-5xl sm:p-5">
           <a
             href="https://github.com/shahdivyank"
             target="_blank"

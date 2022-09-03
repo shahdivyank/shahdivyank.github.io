@@ -8,14 +8,14 @@ import Workshops from "../components/Workshops";
 
 const Index = () => {
   return (
-    <>
+    <div className="overflow-y-auto overflow-x-hidden">
       <Landing />
       <About />
       <Experiences />
       <Projects />
       <Workshops />
       <Footer />
-    </>
+    </div>
   );
 };
 
