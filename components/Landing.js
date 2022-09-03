@@ -21,6 +21,8 @@ const createStars = (starsToCreate) => {
 
 const Landing = () => {
   const [shootingStars, setShootingStars] = useState([]);
+  // const [largeStars, setLargeStars] = useState([]);
+  // const [smallStars, setSmallStars] = useState([]);
 
   const largeStars = useMemo(() => createStars(250), []);
   const smallStars = useMemo(() => createStars(250), []);
@@ -65,11 +67,11 @@ const Landing = () => {
         ))}
         <Row className="flex justify-center items-center">
           <Col lg={12} className="flex justify-center items-center flex-col">
-            <p className="font-lexend text-8xl text-center text-white">
+            <div className="font-lexend text-8xl text-center text-white">
               Divyank Shah
               <br />
               <p className="text-3xl mt-3">Aspiring Software Engineer</p>
-            </p>
+            </div>
             <div className="w-full flex justify-evenly items-center text-5xl">
               <a
                 href="https://github.com/shahdivyank"

@@ -63,10 +63,10 @@ const Experiences = () => {
         {experiences.map((experience, index) => (
           <Col xl={12} key={index} className="flex justify-between flex-col">
             <div className="flex justify-between w-full">
-              <p className="text-xl">
+              <div className="text-xl">
                 <p className="text-3xl">{experience.company}</p>
                 {experience.role}
-              </p>
+              </div>
               <p className="text-xl text-right">
                 {experience.time}
                 <br />

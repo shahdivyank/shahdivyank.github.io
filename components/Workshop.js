@@ -10,7 +10,7 @@ const Workshop = ({ name, subtitle, sponsor, date }) => {
           date > new Date() ? "text-black" : "text-gray-600"
         } ${date > new Date() ? "border-black" : "border-gray-600"}`}
       >
-        <p className="text-2xl text-center">
+        <div className="text-2xl text-center">
           {name}
           <br />
           <div className="text-base">
@@ -18,7 +18,7 @@ const Workshop = ({ name, subtitle, sponsor, date }) => {
             <br />
             {sponsor} - {date.toLocaleDateString()}
           </div>
-        </p>
+        </div>
       </div>
     </Col>
   );
