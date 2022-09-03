@@ -60,10 +60,12 @@ const Landing = () => {
         ))} */}
         <Row className="flex justify-center items-center">
           <Col lg={12} className="flex justify-center items-center flex-col">
-            <div className="font-lexend text-8xl text-center text-white">
+            <div className="font-lexend text-5xl md:text-8xl  text-center text-white">
               Divyank Shah
               <br />
-              <p className="text-3xl mt-3">Aspiring Software Engineer</p>
+              <p className="text-2xl md:text-3xl mt-3">
+                Aspiring Software Engineer
+              </p>
             </div>
             <div className="w-full flex justify-evenly items-center text-5xl">
               <a
