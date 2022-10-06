@@ -7,8 +7,8 @@ const Workshop = ({ name, subtitle, sponsor, date }) => {
     <Col lg={3} md={4} xs={6} className="font-lexend p-1">
       <div
         className={`rounded ${
-          date > new Date() ? "text-black" : "text-gray-600"
-        } ${date > new Date() ? "border-black" : "border-gray-600"}`}
+          date > new Date() ? "text-black" : "text-white"
+        } ${date > new Date() ? "border-black" : "border-white"}`}
       >
         <div className="text-2xl text-center">
           {name}
