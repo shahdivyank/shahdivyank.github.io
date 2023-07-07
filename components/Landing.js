@@ -104,7 +104,7 @@ const Landing = () => {
                 <FaEnvelope />
               </a>
               <a
-                href="shahdivyank_resume_2022.pdf"
+                href="Divyank_Shah_Resume.pdf"
                 target="_blank"
                 className="text-white hover:!text-gray-300 cursor-pointer"
                 rel="noreferrer"
