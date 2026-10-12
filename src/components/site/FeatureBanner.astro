@@ -1,0 +1,37 @@
+---
+import Button from "./Button.astro";
+interface Props {
+  eyebrow?: string;
+  title?: string;
+  imageSrc?: string;
+  imageAlt?: string;
+  ctaHref?: string;
+}
+const {
+  eyebrow = "Featured project",
+  title = "[Project title]",
+  imageSrc = "https://images.unsplash.com/photo-1493397212122-2b85dda8106b?w=1600&q=80&auto=format&fit=crop",
+  imageAlt = "Featured project preview",
+  ctaHref = "/work",
+} = Astro.props;
+---
+<div class="hairline relative w-full overflow-hidden border border-line">
+  <img src={imageSrc} alt={imageAlt} class="aspect-16/10 w-full object-cover md:aspect-21/9" loading="eager" />
+  <div class="absolute inset-0 bg-black/55" aria-hidden="true"></div>
+  <div class="absolute inset-0 flex flex-col items-center justify-center gap-4 px-4 text-center">
+    <p class="flex items-center gap-3 text-[0.75rem] uppercase tracking-[0.2em] text-white/90">
+      <span class="inline-block h-px w-8 bg-white/70" aria-hidden="true"></span>
+      {eyebrow}
+      <span class="inline-block h-px w-8 bg-white/70" aria-hidden="true"></span>
+    </p>
+    <h2 class="max-w-4xl text-3xl font-medium uppercase leading-[1.05] tracking-[-0.02em] text-white md:text-5xl">{title}</h2>
+    <a href={ctaHref} class="mt-2 inline-flex items-center gap-2 border border-white px-5 py-3 text-sm text-white transition hover:bg-white hover:text-black">
+      Explore Now <span aria-hidden="true">↗</span>
+    </a>
+  </div>
+  <div class="absolute bottom-4 left-1/2 flex -translate-x-1/2 gap-2" aria-hidden="true">
+    <span class="h-1.5 w-1.5 rounded-full bg-white"></span>
+    <span class="h-1.5 w-1.5 rounded-full bg-white/40"></span>
+    <span class="h-1.5 w-1.5 rounded-full bg-white/40"></span>
+  </div>
+</div>

@@ -1,0 +1,277 @@
+---
+import MediaPlaceholder from "./MediaPlaceholder.astro";
+
+type Ratio = "landscape" | "logo" | "portrait";
+type Photo = { src?: string; alt?: string; ratio: Ratio };
+type ConcertSlide = { artist: string; place: string; date: string; photos: Photo[] };
+
+interface Props {
+  entries: ConcertSlide[];
+}
+
+const { entries } = Astro.props;
+---
+
+<div class="mt-10" data-carousel aria-roledescription="carousel" aria-label="Concert gallery">
+  <div class="relative">
+    <div
+      class="carousel-track flex snap-x snap-mandatory gap-5 overflow-x-auto pb-2 md:gap-8"
+      data-carousel-track
+      tabindex="0"
+      role="group"
+      aria-label="Concert photos, use arrow keys to move between concerts"
+    >
+      {entries.map((concert, index) => (
+        <article
+          class="w-[88%] shrink-0 snap-start sm:w-[80%] md:w-[72%]"
+          data-slide
+          data-index={index}
+          aria-roledescription="slide"
+          aria-label={`${index + 1} of ${entries.length}: ${concert.artist}`}
+        >
+          <header class="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1 border-b border-line pb-3">
+            <h3 class="text-lg font-medium">{concert.artist}</h3>
+            <p class="text-sm text-ink-muted">
+              {concert.place} <span class="text-ink-muted/70">· {concert.date}</span>
+            </p>
+          </header>
+          <div
+            class:list={[
+              "mt-4 grid grid-cols-1 gap-4 sm:gap-5",
+              concert.photos.length === 3 ? "sm:grid-cols-3" : "sm:grid-cols-2",
+            ]}
+          >
+            {concert.photos.map((photo, photoIndex) => (
+              <figure class="m-0">
+                {photo.src ? (
+                  <img
+                    src={photo.src}
+                    alt={photo.alt ?? `${concert.artist} at ${concert.place}, photo ${photoIndex + 1}`}
+                    loading="lazy"
+                    class:list={[
+                      "w-full rounded-sm object-cover",
+                      photo.ratio === "portrait" ? "aspect-3/4" : photo.ratio === "logo" ? "aspect-square" : "aspect-16/10",
+                    ]}
+                  />
+                ) : (
+                  <MediaPlaceholder label={`${concert.artist} · Photo ${photoIndex + 1}`} ratio={photo.ratio} />
+                )}
+                <figcaption class="mt-2 text-xs uppercase tracking-wide text-ink-muted">
+                  {photo.src ? `Photo ${photoIndex + 1}` : "Photo placeholder"}
+                </figcaption>
+              </figure>
+            ))}
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+
+  <div class="mt-5 flex items-center justify-between gap-4">
+    <div class="flex items-center gap-3">
+      <button
+        type="button"
+        class="carousel-btn"
+        data-carousel-prev
+        aria-label="Previous concert"
+      >
+        ←
+      </button>
+      <button
+        type="button"
+        class="carousel-btn"
+        data-carousel-next
+        aria-label="Next concert"
+      >
+        →
+      </button>
+    </div>
+
+    <div class="flex items-center gap-2" role="tablist" aria-label="Choose concert">
+      {entries.map((concert, index) => (
+        <button
+          type="button"
+          class="carousel-dot"
+          data-carousel-dot
+          data-index={index}
+          aria-label={`Go to concert ${index + 1}: ${concert.artist}`}
+          aria-current={index === 0 ? "true" : undefined}
+        />
+      ))}
+    </div>
+
+    <p class="hidden text-xs uppercase tracking-wide text-ink-muted sm:block" data-carousel-status aria-live="polite">
+      {entries.length > 0 ? `1 / ${entries.length}` : ""}
+    </p>
+  </div>
+</div>
+
+<style>
+  .carousel-track {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    scroll-behavior: smooth;
+  }
+  .carousel-track::-webkit-scrollbar {
+    display: none;
+  }
+  .carousel-track:focus-visible {
+    outline: 1px solid var(--color-line, currentColor);
+    outline-offset: 4px;
+  }
+
+  .carousel-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 44px;
+    min-height: 44px;
+    border: 1px solid var(--color-line, rgba(0, 0, 0, 0.2));
+    background: transparent;
+    color: inherit;
+    font-size: 1rem;
+    line-height: 1;
+    transition: background-color 160ms ease, color 160ms ease, opacity 160ms ease;
+    cursor: pointer;
+  }
+  .carousel-btn:hover:not(:disabled) {
+    background: var(--color-ink, #111);
+    color: var(--color-on-ink, #fff);
+  }
+  .carousel-btn:disabled {
+    opacity: 0.3;
+    cursor: default;
+  }
+  .carousel-btn:focus-visible {
+    outline: 1px solid var(--color-ink, #111);
+    outline-offset: 2px;
+  }
+
+  .carousel-dot {
+    width: 8px;
+    height: 8px;
+    padding: 0;
+    border: none;
+    border-radius: 9999px;
+    background: var(--color-line, rgba(0, 0, 0, 0.25));
+    transition: background-color 160ms ease, transform 160ms ease;
+    cursor: pointer;
+  }
+  .carousel-dot[aria-current="true"] {
+    background: var(--color-ink, #111);
+    transform: scale(1.35);
+  }
+  .carousel-dot:focus-visible {
+    outline: 1px solid var(--color-ink, #111);
+    outline-offset: 3px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .carousel-track {
+      scroll-behavior: auto;
+    }
+  }
+</style>
+
+<script>
+  const prefersReducedMotion = () =>
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  document.querySelectorAll<HTMLElement>("[data-carousel]").forEach((root) => {
+    const track = root.querySelector<HTMLElement>("[data-carousel-track]");
+    const slides = Array.from(root.querySelectorAll<HTMLElement>("[data-slide]"));
+    const prev = root.querySelector<HTMLButtonElement>("[data-carousel-prev]");
+    const next = root.querySelector<HTMLButtonElement>("[data-carousel-next]");
+    const dots = Array.from(root.querySelectorAll<HTMLButtonElement>("[data-carousel-dot]"));
+    const status = root.querySelector<HTMLElement>("[data-carousel-status]");
+
+    if (!track || slides.length === 0) return;
+
+    let index = 0;
+
+    const nearestIndex = () => {
+      const trackLeft = track.getBoundingClientRect().left;
+      let best = 0;
+      let bestDistance = Number.POSITIVE_INFINITY;
+      slides.forEach((slide, i) => {
+        const distance = Math.abs(slide.getBoundingClientRect().left - trackLeft);
+        if (distance < bestDistance) {
+          bestDistance = distance;
+          best = i;
+        }
+      });
+      return best;
+    };
+
+    const render = () => {
+      dots.forEach((dot, i) => {
+        if (i === index) dot.setAttribute("aria-current", "true");
+        else dot.removeAttribute("aria-current");
+      });
+      if (prev) prev.disabled = index === 0;
+      if (next) next.disabled = index === slides.length - 1;
+      if (status) status.textContent = `${index + 1} / ${slides.length}`;
+      slides.forEach((slide, i) => {
+        slide.setAttribute("aria-hidden", i === index ? "false" : "true");
+      });
+    };
+
+    const goTo = (target: number) => {
+      index = Math.max(0, Math.min(slides.length - 1, target));
+      slides[index].scrollIntoView({
+        behavior: prefersReducedMotion() ? "auto" : "smooth",
+        inline: "start",
+        block: "nearest",
+      });
+      render();
+    };
+
+    prev?.addEventListener("click", () => goTo(index - 1));
+    next?.addEventListener("click", () => goTo(index + 1));
+    dots.forEach((dot, i) => dot.addEventListener("click", () => goTo(i)));
+
+    track.addEventListener("keydown", (event) => {
+      if (event.key === "ArrowRight") {
+        event.preventDefault();
+        goTo(index + 1);
+      } else if (event.key === "ArrowLeft") {
+        event.preventDefault();
+        goTo(index - 1);
+      } else if (event.key === "Home") {
+        event.preventDefault();
+        goTo(0);
+      } else if (event.key === "End") {
+        event.preventDefault();
+        goTo(slides.length - 1);
+      }
+    });
+
+    let ticking = false;
+    track.addEventListener(
+      "scroll",
+      () => {
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(() => {
+          const nextIndex = nearestIndex();
+          if (nextIndex !== index) index = nextIndex;
+          render();
+          ticking = false;
+        });
+      },
+      { passive: true },
+    );
+
+    render();
+  });
+</script>
+</parameter>
+<task_progress>
+- [x] Locate concert gallery code
+- [x] Review gallery components and existing carousel patterns
+- [x] Draft carousel plan
+- [ ] Create ConcertCarousel component
+- [ ] Wire carousel into music.astro
+- [ ] Build and verify
+</task_progress>
+</write_to_file>

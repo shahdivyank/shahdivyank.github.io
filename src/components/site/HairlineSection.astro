@@ -1,0 +1,9 @@
+---
+interface Props {
+  id?: string;
+}
+const { id } = Astro.props;
+---
+<section id={id} class="hairline-t gutter w-full py-16 md:py-24">
+  <slot />
+</section>

@@ -1,0 +1,49 @@
+---
+interface Props {
+  active?: string;
+}
+const { active = "Home" } = Astro.props;
+const links = [
+  { label: "Home", href: "/" },
+  { label: "Experiences", href: "/experiences" },
+  { label: "Research", href: "/research" },
+  { label: "Projects", href: "/projects" },
+  { label: "Music", href: "/music" },
+  { label: "Hackathons", href: "/hackathons" },
+  { label: "Organizations", href: "/organizations" },
+  { label: "Teaching", href: "/teaching" },
+];
+---
+<nav aria-label="Sections" class="hairline-b gutter hidden w-full overflow-x-auto border-b border-line md:block">
+  <ul class="flex min-w-max items-stretch justify-between gap-6 md:min-w-0 md:gap-0">
+    {links.map((l, i) => (
+      <li class:list={["flex", i === 0 ? "justify-start" : "", i === links.length - 1 ? "justify-end" : ""]}>
+        <a
+          href={l.href}
+          class="nav-link min-h-11 flex items-center whitespace-nowrap"
+          data-active={active === l.label ? "true" : "false"}
+          aria-current={active === l.label ? "page" : undefined}
+        >
+          {l.label}
+        </a>
+      </li>
+    ))}
+  </ul>
+</nav>
+<div id="mobile-nav" data-mobile-nav class="gutter hidden border-b border-line py-2 md:hidden">
+  <ul class="flex flex-col divide-y divide-line-soft">
+    {links.map((l) => (
+      <li>
+        <a
+          href={l.href}
+          class="flex min-h-12 items-center justify-between py-3 text-sm uppercase tracking-wide"
+          data-active={active === l.label ? "true" : "false"}
+          aria-current={active === l.label ? "page" : undefined}
+        >
+          <span>{l.label}</span>
+          <span aria-hidden="true">→</span>
+        </a>
+      </li>
+    ))}
+  </ul>
+</div>

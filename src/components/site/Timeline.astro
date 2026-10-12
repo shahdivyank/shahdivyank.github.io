@@ -1,0 +1,79 @@
+---
+interface Entry { date: string; byline: string; title: string; label: string; imageSrc: string; href: string }
+interface Props { entries?: Entry[] }
+const { entries = [
+  { date: "2026.01", byline: "Writing", title: "[Post title]", label: "Essay", imageSrc: "https://images.unsplash.com/photo-1455390582262-044cdead277a?w=800&q=80&auto=format&fit=crop", href: "/writing" },
+  { date: "2025.09", byline: "Release", title: "[Project release]", label: "Project", imageSrc: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=800&q=80&auto=format&fit=crop", href: "/work" },
+  { date: "2025.05", byline: "Writing", title: "[Post title]", label: "Notes", imageSrc: "https://images.unsplash.com/photo-1457369804613-52c61a468e7d?w=800&q=80&auto=format&fit=crop", href: "/writing" },
+  { date: "2024.12", byline: "Career", title: "[Milestone]", label: "Milestone", imageSrc: "https://images.unsplash.com/photo-1499750310107-5fef28a66643?w=800&q=80&auto=format&fit=crop", href: "/about" },
+]} = Astro.props;
+---
+<div data-timeline class="hidden border border-line md:flex" role="tablist" aria-label="Timeline">
+  {entries.map((e, i) => (
+    <div
+      role="tab"
+      tabindex="0"
+      aria-selected={i===0 ? "true" : "false"}
+      data-item={i}
+      class:list={[
+        "group flex min-h-105 cursor-pointer flex-col justify-between border-line py-6 transition-all duration-300 ease-out",
+        i>0 ? "border-l" : "",
+        i===0 ? "flex-3 px-6" : "flex-1 items-center px-3 text-ink-muted hover:text-ink"
+      ]}
+    >
+      <div class="flex w-full justify-between text-xs uppercase tracking-wide">
+        <span class="vertical-word md:vertical-date">{e.date}</span>
+        {i===0 && <span>{e.byline}</span>}
+      </div>
+      {i===0 ? (
+        <div class="mt-8">
+          <div class="card-frame mb-4 aspect-16/10 border border-line"><img src={e.imageSrc} alt="" class="h-full w-full object-cover" /></div>
+          <p class="text-xs uppercase text-ink-muted">{e.label} — {e.date}</p>
+          <a href={e.href} class="mt-1 block text-2xl font-medium">{e.title}</a>
+        </div>
+      ) : (
+        <p class="vertical-word text-xs uppercase tracking-[0.2em]">{e.title}</p>
+      )}
+    </div>
+  ))}
+</div>
+
+<div class="flex flex-col gap-0 border border-line md:hidden">
+  {entries.map((e) => (
+    <a href={e.href} class="flex gap-4 border-b border-line p-4 last:border-b-0">
+      <div class="card-frame h-20 w-20 shrink-0 border border-line"><img src={e.imageSrc} alt="" class="h-full w-full object-cover" /></div>
+      <div>
+        <p class="text-xs uppercase text-ink-muted">{e.label} — {e.date} · {e.byline}</p>
+        <p class="mt-1 font-medium">{e.title}</p>
+      </div>
+    </a>
+  ))}
+</div>
+
+<script>
+  const root = document.querySelector('[data-timeline]');
+  const items = [...(root?.querySelectorAll('[data-item]') ?? [])] as HTMLElement[];
+  function activate(idx: number) {
+    items.forEach((el, i) => {
+      const active = i === idx;
+      el.setAttribute('aria-selected', String(active));
+      el.classList.toggle('flex-3', active);
+      el.classList.toggle('flex-1', !active);
+      el.classList.toggle('px-6', active);
+      el.classList.toggle('px-3', !active);
+    });
+  }
+  items.forEach((el, i) => {
+    el.addEventListener('click', () => activate(i));
+    el.addEventListener('keydown', (ev) => {
+      if (ev.key === 'Enter' || ev.key === ' ') { ev.preventDefault(); activate(i); }
+      if (ev.key === 'ArrowRight') { const n = (i+1)%items.length; (items[n] as HTMLElement).focus(); activate(n); }
+      if (ev.key === 'ArrowLeft') { const p = (i-1+items.length)%items.length; (items[p] as HTMLElement).focus(); activate(p); }
+    });
+  });
+</script>
+<style>
+  @media (min-width: 768px) {
+    .vertical-date { writing-mode: vertical-rl; transform: rotate(180deg); }
+  }
+</style>

@@ -1,0 +1,22 @@
+---
+interface Item { src: string; alt: string; title: string; caption: string; tall?: boolean }
+interface Props { items?: Item[] }
+const { items = [
+  { src: "https://images.unsplash.com/photo-1524758631624-e2822e304c36?w=800&q=80&auto=format&fit=crop", alt: "Project detail", title: "[PROJECT A]", caption: "Short italic caption", tall: false },
+  { src: "https://images.unsplash.com/photo-1558655146-9f40138edfeb?w=800&q=80&auto=format&fit=crop", alt: "Featured work tall", title: "[FEATURED WORK]", caption: "Center tall image caption", tall: true },
+  { src: "https://images.unsplash.com/photo-1561070791-2526d30994b5?w=800&q=80&auto=format&fit=crop", alt: "Project detail", title: "[PROJECT B]", caption: "Short italic caption", tall: false },
+]} = Astro.props;
+---
+<div class="grid grid-cols-1 gap-8 md:grid-cols-3 md:items-start">
+  {items.map((it) => (
+    <figure class="m-0">
+      <div class:list={["card-frame border border-line", it.tall ? "aspect-3/4" : "aspect-16/10"]}>
+        <img src={it.src} alt={it.alt} class="h-full w-full object-cover" loading="lazy" />
+      </div>
+      <figcaption class="mt-3">
+        <p class="text-xs uppercase tracking-wide">{it.title}</p>
+        <p class="text-sm italic text-ink-muted">{it.caption}</p>
+      </figcaption>
+    </figure>
+  ))}
+</div>

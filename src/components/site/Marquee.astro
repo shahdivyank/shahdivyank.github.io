@@ -1,0 +1,16 @@
+---
+interface Props { items?: string[] }
+const { items = ["Portfolio", "Work", "Writing", "About", "Now", "Contact"] } = Astro.props;
+const row = [...items, ...items];
+---
+<div class="marquee w-full overflow-hidden border-y border-ink bg-ink py-3 text-on-ink" role="marquee" aria-label="Highlights">
+  <div class="marquee-track gap-8 pr-8">
+    {[0,1].map((half) => (
+      <div class="flex shrink-0 items-center gap-8" aria-hidden={half===1 ? "true" : undefined}>
+        {items.map((t) => (
+          <span class="whitespace-nowrap text-sm uppercase tracking-[0.15em]">{t} <span class="ml-8 inline-block">✦</span></span>
+        ))}
+      </div>
+    ))}
+  </div>
+</div>

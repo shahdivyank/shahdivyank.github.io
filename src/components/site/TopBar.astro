@@ -1,0 +1,82 @@
+---
+interface Props {
+  contactHref?: string;
+  showName?: boolean;
+}
+const { contactHref = "/teaching", showName = false } = Astro.props;
+---
+<header class="hairline-b flex h-14 w-full items-stretch justify-between md:h-16">
+  <div class="flex items-stretch">
+    {showName && (
+      <a
+        href="/"
+        class="flex items-center whitespace-nowrap border-r border-line px-4 text-sm font-medium uppercase tracking-wide md:px-6"
+      >
+        Divyank Shah
+      </a>
+    )}
+    <button
+      type="button"
+      aria-label="Open menu"
+      aria-expanded="false"
+      aria-controls="mobile-nav"
+      data-menu-button
+      class="flex w-14 shrink-0 items-center justify-center border-r border-line md:hidden md:w-16"
+    >
+      <span class="flex flex-col gap-1.25" aria-hidden="true" data-menu-icon>
+        <span data-menu-line class="block h-0.5 w-5 bg-ink transition-transform duration-200"></span>
+        <span data-menu-line class="block h-0.5 w-5 bg-ink transition-opacity duration-200"></span>
+        <span data-menu-line class="block h-0.5 w-5 bg-ink transition-transform duration-200"></span>
+      </span>
+    </button>
+  </div>
+  <div class="flex-1" aria-hidden="true"></div>
+  <div class="flex items-stretch">
+    <a href="/" class="hidden items-center border-l border-line px-5 text-sm sm:flex">Home</a>
+    <a href={contactHref} class="flex items-center bg-ink px-5 text-sm text-on-ink">
+      Contact <span aria-hidden="true" class="ml-1">↗</span>
+    </a>
+  </div>
+</header>
+<script>
+  function initMenu() {
+    const btn = document.querySelector("[data-menu-button]");
+    const nav = document.getElementById("mobile-nav") ?? document.querySelector("[data-mobile-nav]");
+    const lines = document.querySelectorAll("[data-menu-line]");
+    if (!btn || !nav) return;
+    const setOpen = (open) => {
+      btn.setAttribute("aria-expanded", String(open));
+      btn.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+      nav.classList.toggle("hidden", !open);
+      if (lines.length === 3) {
+        const l1 = lines[0];
+        const l2 = lines[1];
+        const l3 = lines[2];
+        if (open) {
+          l1.style.transform = "translateY(7px) rotate(45deg)";
+          l2.style.opacity = "0";
+          l3.style.transform = "translateY(-7px) rotate(-45deg)";
+        } else {
+          l1.style.transform = "";
+          l2.style.opacity = "";
+          l3.style.transform = "";
+        }
+      }
+    };
+    btn.addEventListener("click", () => {
+      const expanded = btn.getAttribute("aria-expanded") === "true";
+      setOpen(!expanded);
+    });
+    nav.querySelectorAll("a").forEach((a) => {
+      a.addEventListener("click", () => setOpen(false));
+    });
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") setOpen(false);
+    });
+  }
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initMenu);
+  } else {
+    initMenu();
+  }
+</script>

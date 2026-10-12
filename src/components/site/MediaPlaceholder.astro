@@ -1,0 +1,14 @@
+---
+interface Props {
+  label?: string;
+  ratio?: "landscape" | "logo" | "portrait";
+}
+const { label = "IMAGE PLACEHOLDER", ratio = "landscape" } = Astro.props;
+---
+
+<div class:list={["card-frame flex items-center justify-center border border-dashed border-line bg-ink/5 p-6 text-center", ratio === "portrait" ? "aspect-3/4" : ratio === "logo" ? "aspect-square" : "aspect-16/10"]}>
+  <div>
+    <p class="text-xs uppercase tracking-wide text-ink-muted">Replace with image</p>
+    <p class="mt-2 text-sm font-medium uppercase">{label}</p>
+  </div>
+</div>

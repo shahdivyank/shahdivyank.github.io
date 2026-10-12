@@ -1,0 +1,548 @@
+---
+import Layout from "../layouts/Layout.astro";
+import TopBar from "../components/site/TopBar.astro";
+import SectionNav from "../components/site/SectionNav.astro";
+import Masthead from "../components/site/Masthead.astro";
+import HairlineSection from "../components/site/HairlineSection.astro";
+import SectionHeadingRow from "../components/site/SectionHeadingRow.astro";
+import Reveal from "../components/site/Reveal.astro";
+import LinkIcon from "../components/site/LinkIcon.astro";
+import Footer from "../components/site/Footer.astro";
+
+type Project = {
+  title: string;
+  href: string;
+  linkLabel?: string;
+  secondaryHref?: string;
+  secondaryLabel?: string;
+  eyebrow: string;
+  desc: string;
+  bullets?: string[];
+  categories: string[];
+};
+
+const categories = [
+  { id: "all", label: "All" },
+  { id: "fullstack", label: "Fullstack" },
+  { id: "embedded", label: "Embedded Systems" },
+  { id: "data-science", label: "Data Science" },
+  { id: "ml", label: "ML" },
+  { id: "mobile", label: "Mobile Development" },
+  { id: "dev-tools", label: "Developer Tools" },
+  { id: "bots", label: "Bots & Automation" },
+  { id: "desktop", label: "Desktop Apps" },
+];
+const categoryLabels: Record<string, string> = Object.fromEntries(
+  categories.map((cat) => [cat.id, cat.label]),
+);
+const searchText = (p: Project) =>
+  [p.title, p.eyebrow, p.desc, ...(p.bullets ?? [])].join(" ").toLowerCase();
+
+const projects: Project[] = [
+  {
+    title: "Vault MCP",
+    href: "https://github.com/shahdivyank/vault-mcp",
+    eyebrow: "EnrichMCP · Redis · Sentence Transformers",
+    desc: "Shared memory layer for cross-agent applications — 3rd place in the FeatureForm MCP Hackathon.",
+    bullets: [
+      "3rd place FeatureForm MCP Hackathon — shared memory for cross-agent apps",
+      "Redis Vector Store + all-mpnet-base-v2 for RAG shared context",
+      "Next.js + Tailwind + TS full-stack viz of individual/shared spaces",
+    ],
+    categories: ["dev-tools", "ml"],
+  },
+  {
+    title: "Speech Master",
+    href: "https://github.com/shahdivyank/speechmaster",
+    secondaryHref: "https://devpost.com/software/speech-master",
+    secondaryLabel: "Devpost ↗",
+    eyebrow: "Next.js · HumeAI · TensorFlow · Socket.io",
+    desc: "Public-speaking coach combining emotion and pose analysis — 2nd place at CalHacks 10.0.",
+    bullets: [
+      "2nd place CalHacks 10.0 — emotion + pose for public speaking",
+      "TensorFlow MoveNet 17-point realtime posture alerts",
+      "Realtime A/V feed over Socket.io + live chat",
+    ],
+    categories: ["ml", "fullstack"],
+  },
+  {
+    title: "Beatdrop",
+    href: "https://apps.apple.com/us/app/beatdrop-social-music/id6749929251",
+    linkLabel: "App Store ↗",
+    eyebrow: "Expo · React Native · Apollo · GraphQL · Go",
+    desc: "Cross-platform social music app — hear the world from another perspective.",
+    bullets: [
+      "Cross-platform social music — hear the world from another perspective",
+      "Spotify/YouTube search + preview + live location",
+      "Go gqlgen on Vercel → Supabase Postgres → Apollo Client",
+    ],
+    categories: ["mobile"],
+  },
+  {
+    title: "Aurora",
+    href: "https://github.com/acm-ucr/aurora",
+    eyebrow: "Next.js · Google OAuth · Firebase",
+    desc: "Hackathon platform template powering 5+ UCR hackathons, built by 70+ devs over 24 months.",
+    bullets: [
+      "Led 70+ devs, 24mo agile all-purpose hackathon site",
+      "Tanstack Table/Virtual −60% lag; judging portal −75–80% delays (5+ hackathons)",
+      "NextAuth role auth, Resend automation −30% ops, QR check-in −60% wait",
+    ],
+    categories: ["fullstack"],
+  },
+  {
+    title: "Turion Space",
+    href: "https://github.com/shahdivyank/turion-space",
+    eyebrow: "Python · Kafka · Grafana · Docker",
+    desc: "Telemetry and analytics pipeline built with Docker, Kafka, and Grafana, featuring matrix_profile-based anomaly-detection models.",
+    categories: ["data-science"],
+  },
+  {
+    title: "Crimson Clues",
+    href: "https://github.com/shahdivyank/crimson-clues",
+    eyebrow: "Next.js · TypeScript · Tailwind",
+    desc: "ACM UCR website template (Crimson Clues) built from a Figma design with Prettier, ESLint, and GitHub Actions CI.",
+    categories: ["fullstack"],
+  },
+  {
+    title: "CS 100 Final Project",
+    href: "https://github.com/shahdivyank/cs100-final-project",
+    eyebrow: "C++ · Qt · GTest",
+    desc: "CS100 final project — a Qt GUI task scheduler with login: add, edit, and complete tasks with due dates, priorities, and classifications, sorted by priority using the Strategy pattern.",
+    categories: ["desktop"],
+  },
+  {
+    title: "Website Portfolio V2",
+    href: "https://github.com/shahdivyank/website-portfolio-v2",
+    eyebrow: "Next.js · JavaScript · GitHub Pages",
+    desc: "Previous generation of this portfolio — a personal site built with Next.js and hosted on GitHub Pages.",
+    categories: ["fullstack"],
+  },
+  {
+    title: "GitFlow",
+    href: "https://github.com/shahdivyank/GitFlow",
+    eyebrow: "Next.js · TreeHacks 2024",
+    desc: "Git workflow visualizer and helper built at TreeHacks 2024 — see Devpost for stack, demo, and team.",
+    categories: ["dev-tools"],
+  },
+  {
+    title: "Maryland Masti",
+    href: "https://github.com/shahdivyank/maryland-masti",
+    eyebrow: "Next.js · Tailwind · GitHub Actions",
+    desc: "Official website for Maryland Masti, a South Asian cultural festival — designed in Figma and shipped with linting, formatting, and GitHub Actions CI.",
+    categories: ["fullstack"],
+  },
+  {
+    title: "Website Portfolio V1",
+    href: "https://github.com/shahdivyank/Website-Portfolio-V1",
+    eyebrow: "HTML · CSS · jQuery",
+    desc: "First-generation personal e-portfolio — a minimalist, Apple-inspired site with a light/dark/auto theme toggle showing experience, projects, and contact info.",
+    categories: ["fullstack"],
+  },
+  {
+    title: "Wizard Chess",
+    href: "https://github.com/shahdivyank/Wizard_Chess",
+    secondaryHref: "https://www.instructables.com/Wizard-Chess",
+    secondaryLabel: "Instructables guide ↗",
+    eyebrow: "Arduino · MIT App Inventor · C++",
+    desc: "Voice-controlled, real-life Wizard Chess from Harry Potter — an Arduino Uno drives an XY plotter of stepper motors over an HC-05 Bluetooth link, commanded by an Android app with house selection, Hedwig's Theme, and illegal-move detection.",
+    categories: ["embedded", "mobile"],
+  },
+  {
+    title: "Remote Control Arduino Car",
+    href: "https://github.com/shahdivyank/Remote_Control_Arduino_Car",
+    eyebrow: "Arduino · C++ · 3D Printing",
+    desc: "IR-remote-controlled Arduino robot car combining motors, IR sensors, and 3D-printed parts — documented step-by-step on Instructables.",
+    categories: ["embedded"],
+  },
+  {
+    title: "Email Automator",
+    href: "https://github.com/shahdivyank/Email_Automator",
+    eyebrow: "Python · Gmail API · Google Sheets",
+    desc: "Email automation for California Robotics Academy — reads Google Forms signups via the Sheets/Drive APIs and sends personalized Gmail confirmations from a placeholder template.",
+    categories: ["bots"],
+  },
+  {
+    title: "Arduino L298N Library",
+    href: "https://github.com/shahdivyank/Arduino_L298N_Library",
+    eyebrow: "Arduino · C++",
+    desc: "Beginner-friendly Arduino library abstracting L298N/L293D motor drivers — pin configuration, PWM speed (percent), direction, timed rotation, and stop, with example sketches.",
+    categories: ["embedded", "dev-tools"],
+  },
+  {
+    title: "Python GUI Calculator",
+    href: "https://github.com/shahdivyank/Python_GUI_Calculator",
+    eyebrow: "Python · Tkinter",
+    desc: "Tkinter desktop calculator supporting addition, subtraction, multiplication, float/integer division, and exponents (with sqrt shortcuts) — usable via buttons or keyboard.",
+    categories: ["desktop"],
+  },
+  {
+    title: "Profanity Checking Discord Bot",
+    href: "https://github.com/shahdivyank/Profanity_Checking_Discord_Bot",
+    eyebrow: "Python · discord.py · Neutrino API",
+    desc: "Discord bot that scans messages for profanity — catching obfuscations like a55 and @ss via the Neutrino Bad Word Filter — deletes offending messages and DMs the author.",
+    categories: ["bots"],
+  },
+  {
+    title: "Hangman Discord Bot",
+    href: "https://github.com/shahdivyank/Hangman_Discord_Bot",
+    eyebrow: "Python · discord.py",
+    desc: "Single-player Hangman bot for Discord (!playHangman, !guess, !guessWord, !endgame) that reveals the word and dictionary definitions after each round.",
+    categories: ["bots"],
+  },
+  {
+    title: "Formatting Action",
+    href: "https://github.com/acm-ucr/formatting",
+    eyebrow: "GitHub Actions · Node.js · Prettier",
+    desc: "Custom GitHub Action that checks code formatting with Prettier (ESLint optional) on Node.js 20.10+, used across acm-ucr repos.",
+    categories: ["dev-tools"],
+  },
+  {
+    title: "Build Action",
+    href: "https://github.com/acm-ucr/build",
+    eyebrow: "GitHub Actions · npm",
+    desc: "Custom GitHub Action that builds acm-ucr projects with npm on Node.js 20.10+.",
+    categories: ["dev-tools"],
+  },
+  {
+    title: "ACM Discord Bot",
+    href: "https://github.com/acm-ucr/discord",
+    eyebrow: "Python · Poetry · SendGrid",
+    desc: "Discord bot for the UCR ACM server — manages role assignments (verified, alumni, grad/undergrad) from env-configured roles with SendGrid email verification.",
+    categories: ["bots"],
+  },
+  {
+    title: "Membership Portal",
+    href: "https://github.com/acm-ucr/membership-portal",
+    eyebrow: "Next.js · JavaScript",
+    desc: "Next.js codebase for the ACM UCR membership portal.",
+    categories: ["fullstack"],
+  },
+  {
+    title: "Sonja Lyubomirsky",
+    href: "https://github.com/acm-ucr/Sonja-Lyubomirsky",
+    eyebrow: "Next.js · Tailwind · ESLint",
+    desc: "Website project built with Next.js and TailwindCSS from a Figma design, with ESLint, Prettier, and GitHub Actions tooling.",
+    categories: ["fullstack"],
+  },
+  {
+    title: "Images Action",
+    href: "https://github.com/acm-ucr/images",
+    eyebrow: "GitHub Actions · Shell · Docker",
+    desc: "Custom GitHub Action that converts and compresses images in /public to WebP with cwebp — used by 15+ ACM projects and hackathons.",
+    categories: ["dev-tools"],
+  },
+  {
+    title: "Discord Python Hackpack",
+    href: "https://github.com/acm-ucr/discord-python-hackpack",
+    eyebrow: "Python · Poetry · discord.py",
+    desc: "Hackpack for building Discord bots in Python 3.12+ with Poetry, YAPF formatting, and Pylint linting — taught in ACM workshops.",
+    categories: ["bots", "dev-tools"],
+  },
+  {
+    title: "Computer Vision Hackpack",
+    href: "https://github.com/acm-ucr/computer-vision-hackpack",
+    eyebrow: "Python · OpenCV · Poetry",
+    desc: "Computer-vision hackpack — a Python 3.8+ starter managed with Poetry (YAPF/Pylint) for ACM workshops.",
+    categories: ["ml"],
+  },
+  {
+    title: "Arduino Hackpack",
+    href: "https://github.com/acm-ucr/arduino-hackpack",
+    eyebrow: "Arduino · C++",
+    desc: "Arduino hackpack — starter sketches designed to run in the Arduino IDE for ACM's intro-to-embedded-systems workshops.",
+    categories: ["embedded"],
+  },
+  {
+    title: "Machine Learning Hackpack",
+    href: "https://github.com/acm-ucr/machine-learning-hackpack",
+    eyebrow: "Python · Jupyter · pandas",
+    desc: "Machine-learning hackpack — Jupyter notebooks with pandas and matplotlib, runnable in VS Code or Google Colab.",
+    categories: ["ml"],
+  },
+  {
+    title: "bitByBit",
+    href: "https://github.com/acm-ucr/bitByBit",
+    eyebrow: "Next.js · Tailwind · GitHub Actions",
+    desc: "bitByBit — website project built with Next.js and TailwindCSS from a Figma design, with ESLint, Prettier, and GitHub Actions CI.",
+    categories: ["fullstack"],
+  },
+  {
+    title: "Linting Action",
+    href: "https://github.com/acm-ucr/linting",
+    eyebrow: "GitHub Actions · ESLint",
+    desc: "Custom GitHub Action that lints acm-ucr code with ESLint on Node.js 20.10+.",
+    categories: ["dev-tools"],
+  },
+  {
+    title: "Starlight (Legacy)",
+    href: "https://github.com/acm-ucr/starlight-legacy",
+    eyebrow: "Next.js · TypeScript · Tailwind",
+    desc: "Legacy ACM UCR website built with Next.js, TypeScript, and TailwindCSS from a Figma design.",
+    categories: ["fullstack"],
+  },
+  {
+    title: "Next.js Auth Hackpack",
+    href: "https://github.com/acm-ucr/nextjs-auth-hackpack",
+    eyebrow: "Next.js · Auth.js · MongoDB",
+    desc: "Hackpack template for Next.js apps with Auth.js — Google login and MongoDB skeleton code ready for hackathon teams.",
+    categories: ["dev-tools", "fullstack"],
+  },
+  {
+    title: "Firebase Next.js Hackpack",
+    href: "https://github.com/acm-ucr/firebase-nextjs-hackpack",
+    eyebrow: "Next.js · Firebase · Tailwind",
+    desc: "Hackpack template for Next.js apps wired to Firebase (auth + project env) with Tailwind, ESLint, and Prettier.",
+    categories: ["dev-tools", "fullstack"],
+  },
+  {
+    title: "Next.js Hackpack",
+    href: "https://github.com/acm-ucr/nextjs-hackpack",
+    eyebrow: "Next.js · Tailwind · GitHub Actions",
+    desc: "Starter hackpack for building Next.js apps with TailwindCSS, ESLint, Prettier, and GitHub Actions on Node 20.10+.",
+    categories: ["dev-tools", "fullstack"],
+  },
+  {
+    title: "ACM Wizard Chess",
+    href: "https://github.com/acm-ucr/wizard-chess",
+    eyebrow: "Arduino · C++ · Robotics",
+    desc: "Robotics project recreating Harry Potter's Wizard Chess — an Arduino Uno drives an XY plotter so chess pieces move themselves.",
+    categories: ["embedded"],
+  },
+  {
+    title: "ACM Hydra",
+    href: "https://github.com/acm-ucr/acm-hydra",
+    eyebrow: "Next.js · Tailwind · Cypress",
+    desc: "Official website for ACM Hydra built with Next.js and TailwindCSS from a Figma design, tested with Cypress.",
+    categories: ["fullstack"],
+  },
+  {
+    title: "ULA Website",
+    href: "https://github.com/acm-ucr/ula-website",
+    eyebrow: "Next.js · TypeScript · shadcn/ui",
+    desc: "ULA (Spring '25) website — Next.js, TypeScript, TailwindCSS, shadcn/ui, and React Query surfacing CS course Google Calendars.",
+    categories: ["fullstack"],
+  },
+  {
+    title: "ACM Atlas",
+    href: "https://github.com/acm-ucr/acm-atlas",
+    eyebrow: "Next.js · TypeScript · React Query",
+    desc: "ACM Atlas website — Next.js, TypeScript, TailwindCSS, shadcn/ui, and React Query with Google Calendar and Instagram integrations.",
+    categories: ["fullstack"],
+  },
+  {
+    title: "DESIGN@UCR 2.0",
+    href: "https://github.com/designatucr/designatucr2.0",
+    eyebrow: "Next.js · JavaScript",
+    desc: "Codebase for the DESIGN@UCR 2.0 website, built with Next.js.",
+    categories: ["fullstack"],
+  },
+  {
+    title: "Designverse 2024",
+    href: "https://github.com/designatucr/designverse2024",
+    eyebrow: "Next.js · Firebase · NextAuth",
+    desc: "Website for Designverse 2024, DESIGN@UCR's designathon — Next.js with Firebase auth, Google OAuth, and Google Calendar integration plus ESLint, Prettier, GitHub Actions, and Cypress.",
+    categories: ["fullstack"],
+  },
+  {
+    title: "Designverse 2025",
+    href: "https://github.com/designatucr/designverse2025",
+    eyebrow: "Next.js · Firebase · NextAuth",
+    desc: "Website for Designverse 2025 — Next.js with Firebase, Google OAuth, and Google Calendar, plus lint/format/CI and Cypress tooling.",
+    categories: ["fullstack"],
+  },
+  {
+    title: "CutieHack 2023",
+    href: "https://github.com/cutiehack-ucr/cutie-hack-2023",
+    eyebrow: "Next.js · Firebase · NextAuth",
+    desc: "Website for CutieHack 2023 — Next.js with Firebase, Google OAuth, and Google Calendar integration, with ESLint, Prettier, and GitHub Actions.",
+    categories: ["fullstack"],
+  },
+  {
+    title: "CutieHack 2024",
+    href: "https://github.com/cutiehack-ucr/cutie-hack-2024",
+    eyebrow: "Next.js · Firebase · NextAuth",
+    desc: "Website for CutieHack 2024 — Next.js hackathon platform with Firebase, Google OAuth, and Google Calendar, plus ESLint, Prettier, GitHub Actions, and Cypress.",
+    categories: ["fullstack"],
+  },
+  {
+    title: "Citrus Hack 2024",
+    href: "https://github.com/citrushack/citrus-hack-2024",
+    eyebrow: "Next.js · Firebase · NextAuth",
+    desc: "Website for Citrus Hack 2024 — Next.js with Firebase auth, Google OAuth, and Google Calendar, plus lint/format/CI and Cypress.",
+    categories: ["fullstack"],
+  },
+  {
+    title: "RoseHack 2025",
+    href: "https://github.com/Rose-Hacks/rosehack-2025",
+    eyebrow: "Next.js · Firebase · NextAuth",
+    desc: "Website for RoseHack 2025 — Next.js with Firebase, Google OAuth, and Google Calendar, plus linting, formatting, CI, and Cypress.",
+    categories: ["fullstack"],
+  },
+  {
+    title: "RoseHack 2024",
+    href: "https://github.com/Rose-Hacks/rosehack2024",
+    eyebrow: "Next.js · Firebase · NextAuth",
+    desc: "Website for RoseHack 2024 — Next.js with Firebase, Google OAuth, and Google Calendar, plus ESLint, Prettier, GitHub Actions, and Cypress.",
+    categories: ["fullstack"],
+  },
+  {
+    title: "BearHack 2024",
+    href: "https://github.com/bearhack-ucr/bearhack2024",
+    eyebrow: "Next.js · Firebase · NextAuth",
+    desc: "Website for BearHack 2024 — Next.js with Firebase, Google OAuth, and Google Calendar, plus lint/format/CI and Cypress.",
+    categories: ["fullstack"],
+  },
+  {
+    title: "BearHack Data Science Intro",
+    href: "https://github.com/bearhack-ucr/data-science-intro",
+    eyebrow: "Python · Jupyter Notebook",
+    desc: "BearHack data-science intro workshop — a Jupyter notebook walking through analysis of an insurance dataset.",
+    categories: ["data-science"],
+  },
+  {
+    title: "BearHack Machine Learning Intro",
+    href: "https://github.com/bearhack-ucr/machine-learning-intro",
+    eyebrow: "Python · Jupyter Notebook",
+    desc: "BearHack machine-learning intro workshop — a starter Jupyter notebook introducing ML fundamentals.",
+    categories: ["ml"],
+  },
+  {
+    title: "Solar Car Website",
+    href: "https://github.com/UCR-Solar-Car/solarcar-website",
+    eyebrow: "Next.js · GitHub Pages",
+    desc: "Website for the UCR Solar Car team, built with Next.js and deployed to GitHub Pages.",
+    categories: ["fullstack"],
+  },
+  {
+    title: "Influx Aggregator",
+    href: "https://github.com/UCR-Solar-Car/influx-aggregator",
+    eyebrow: "Python · Arduino",
+    desc: "Solar car telemetry tooling — a Python package that aggregates vehicle sensor data alongside an Arduino serial-collector sketch.",
+    categories: ["data-science", "embedded"],
+  },
+  {
+    title: "Driver Interface",
+    href: "https://github.com/UCR-Solar-Car/DriverInterface",
+    eyebrow: "C++ · Qt",
+    desc: "Qt-based driver dashboard for UCR Solar Car 2023 — displays system-critical vehicle information and implements ASC competition software regulations (BPS fault indicators, lights, radio comms).",
+    categories: ["embedded", "desktop"],
+  },
+];
+
+const total = projects.length;
+---
+<Layout title="Projects — Divyank Shah" description="52 projects — hackathon platforms, fullstack apps, embedded systems, ML, bots, and dev tooling.">
+  <TopBar showName />
+  <Masthead word="PROJECTS" label="SELECTED WORK" />
+  <SectionNav active="Projects" />
+  <main>
+    <HairlineSection>
+      <Reveal><SectionHeadingRow title="Projects" copy="Hackathon winners, social music, and infra powering 70+ devs and 5+ hackathons — searchable and filterable." ctaLabel="GitHub" ctaHref="https://github.com/shahdivyank" ctaIcon /></Reveal>
+      <div class="mt-10 flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
+        <label class="hairline flex w-full items-center gap-3 px-4 py-3 lg:max-w-md">
+          <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="h-4 w-4 shrink-0 text-ink-muted">
+            <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-4.35-4.35M17 10.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0Z" />
+          </svg>
+          <span class="sr-only">Search projects</span>
+          <input id="project-search" type="search" placeholder="Search by name or description…" autocomplete="off" class="w-full bg-transparent text-sm outline-none placeholder:text-ink-muted" />
+        </label>
+        <div class="flex flex-wrap gap-2" role="group" aria-label="Filter by project type">
+          {categories.map((cat) => (
+            <button type="button" class="filter-btn border border-line px-3 py-2 text-xs uppercase tracking-wide transition-colors" data-project-filter={cat.id} aria-pressed={cat.id === "all" ? "true" : "false"}>{cat.label}</button>
+          ))}
+        </div>
+      </div>
+      <p id="project-count" class="mt-6 text-xs uppercase tracking-wide text-ink-muted" aria-live="polite">Showing {total} of {total} projects</p>
+      <div id="project-grid" class="mt-4 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+        {projects.map((project) => (
+          <Reveal>
+            <article class="hairline relative flex h-full flex-col p-6" data-project data-categories={project.categories.join(",")} data-search={searchText(project)}>
+              <div class="flex min-h-7 items-start justify-between gap-3">
+                <p class="text-xs uppercase tracking-wide text-ink-muted">{project.eyebrow}</p>
+                <p class="shrink-0 border border-line px-2 py-1 text-[0.65rem] font-medium uppercase tracking-wide">{categoryLabels[project.categories[0]]}</p>
+              </div>
+              <h3 class="mt-2 text-lg font-medium">{project.title}</h3>
+              <p class="mt-2 text-sm leading-relaxed text-ink-muted">{project.desc}</p>
+              {project.bullets && (
+                <ul class="mt-3 list-disc space-y-1 pl-5 text-sm text-ink-muted">
+                  {project.bullets.map((bullet) => <li>{bullet}</li>)}
+                </ul>
+              )}
+              <div class="mt-auto flex flex-wrap items-center gap-x-4 gap-y-2 pt-4 text-sm">
+                <a href={project.href} target="_blank" rel="noreferrer" class="inline-flex items-center gap-1.5 underline">
+                  <LinkIcon href={project.href} class="h-4 w-4" />
+                  {project.linkLabel ?? "View repo ↗"}
+                </a>
+                {project.secondaryHref && (
+                  <a href={project.secondaryHref} target="_blank" rel="noreferrer" class="inline-flex items-center gap-1.5 text-ink-muted underline">
+                    <LinkIcon href={project.secondaryHref} class="h-4 w-4" />
+                    {project.secondaryLabel}
+                  </a>
+                )}
+              </div>
+            </article>
+          </Reveal>
+        ))}
+      </div>
+      <p id="projects-empty" class="hairline mt-10 p-10 text-center text-sm text-ink-muted" hidden>No projects match your search or filter.</p>
+    </HairlineSection>
+  </main>
+  <Footer />
+</Layout>
+<script>
+  function initProjectFilters() {
+    const grid = document.getElementById("project-grid");
+    if (!grid || grid.getAttribute("data-filter-init") === "true") return;
+    grid.setAttribute("data-filter-init", "true");
+    const searchInput = document.getElementById("project-search");
+    const countEl = document.getElementById("project-count");
+    const emptyEl = document.getElementById("projects-empty");
+    if (!(searchInput instanceof HTMLInputElement) || !countEl || !emptyEl) return;
+    const buttons = Array.from(
+      document.querySelectorAll<HTMLButtonElement>("[data-project-filter]"),
+    );
+    const items = Array.from(grid.querySelectorAll<HTMLElement>("[data-project]"));
+    let activeFilter = "all";
+
+    function applyFilters() {
+      const query = searchInput.value.trim().toLowerCase();
+      let visible = 0;
+      for (const item of items) {
+        const itemCategories = (item.dataset.categories || "").split(",");
+        const matchesFilter = activeFilter === "all" || itemCategories.includes(activeFilter);
+        const matchesQuery = !query || (item.dataset.search || "").includes(query);
+        const show = matchesFilter && matchesQuery;
+        const wrapper = item.closest("[data-reveal]");
+        if (wrapper instanceof HTMLElement) wrapper.hidden = !show;
+        if (show) visible += 1;
+      }
+      countEl.textContent = `Showing ${visible} of ${items.length} projects`;
+      emptyEl.hidden = visible !== 0;
+    }
+
+    searchInput.addEventListener("input", applyFilters);
+    for (const btn of buttons) {
+      btn.addEventListener("click", () => {
+        activeFilter = btn.getAttribute("data-project-filter") || "all";
+        for (const other of buttons) {
+          other.setAttribute("aria-pressed", other === btn ? "true" : "false");
+        }
+        applyFilters();
+      });
+    }
+    applyFilters();
+  }
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initProjectFilters);
+  } else {
+    initProjectFilters();
+  }
+  document.addEventListener("astro:page-load", initProjectFilters);
+</script>
+<style>
+  .filter-btn[aria-pressed="true"] {
+    background: var(--ink);
+    color: var(--on-ink);
+  }
+</style>

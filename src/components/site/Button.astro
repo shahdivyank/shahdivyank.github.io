@@ -1,0 +1,18 @@
+---
+import LinkIcon from "./LinkIcon.astro";
+interface Props {
+  href?: string;
+  variant?: "primary" | "secondary";
+  icon?: boolean;
+}
+const { href = "#", variant = "primary", icon = false } = Astro.props;
+const cls = variant === "primary" ? "btn-primary" : "btn-secondary";
+const showIcon = icon && /^https?:\/\//i.test(href);
+---
+<a href={href} class={cls}>
+  <span class="inline-flex items-center gap-1.5">
+    {showIcon && <LinkIcon href={href} class="h-3.5 w-3.5" />}
+    <slot />
+  </span>
+  <span class="arrow" aria-hidden="true">↗</span>
+</a>

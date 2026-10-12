@@ -1,0 +1,18 @@
+---
+interface Row { label: string; value: string; }
+interface Props { title?: string; imageSrc?: string; imageAlt?: string; rows?: Row[] }
+const { title="Now", imageSrc="", imageAlt="", rows=[{label:"Location", value:"[City]"}, {label:"Focus", value:"[Focus]"}, {label:"Reading", value:"[Book]"}] } = Astro.props;
+---
+<div class="dashed-panel p-6">
+  {imageSrc && <div class="mb-5 border border-line"><img src={imageSrc} alt={imageAlt} class="aspect-16/10 w-full object-cover" loading="lazy" /></div>}
+  <h3 class="text-sm font-semibold uppercase tracking-[0.15em]">{title}</h3>
+  <dl class="mt-4 flex flex-col gap-3">
+    {rows.map((r) => (
+      <div class="dot-leaders text-sm">
+        <dt class="text-ink-muted">{r.label}</dt>
+        <dd class="value font-medium">{r.value}</dd>
+      </div>
+    ))}
+  </dl>
+  <div class="mt-4"><slot /></div>
+</div>

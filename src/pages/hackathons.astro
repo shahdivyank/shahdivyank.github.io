@@ -1,0 +1,277 @@
+---
+import Layout from "../layouts/Layout.astro";
+import TopBar from "../components/site/TopBar.astro";
+import SectionNav from "../components/site/SectionNav.astro";
+import Masthead from "../components/site/Masthead.astro";
+import HairlineSection from "../components/site/HairlineSection.astro";
+import SectionHeadingRow from "../components/site/SectionHeadingRow.astro";
+import Reveal from "../components/site/Reveal.astro";
+import StatsBar from "../components/site/StatsBar.astro";
+import Gallery from "../components/site/Gallery.astro";
+import LinkIcon from "../components/site/LinkIcon.astro";
+import Footer from "../components/site/Footer.astro";
+
+type AttendedProject = {
+  event: string;
+  project: string;
+  desc: string;
+  href: string;
+  award?: string;
+};
+
+// Ordered newest → oldest (most recent first). Same-year tie-break: RoseHack → CitrusHack → CutieHack;
+// other same-year events keep their existing relative order. CacheFlow (WeaveHacks 2) happened after Vault MCP (FeatureForm 2025).
+const attendedProjects: AttendedProject[] = [
+  {
+    event: "WeaveHacks 2",
+    project: "CacheFlow",
+    desc: "Built at WeaveHacks 2 — caching / flow optimization helper. See Devpost for stack, demo, and team.",
+    href: "https://devpost.com/software/cacheflow",
+  },
+  {
+    event: "FeatureForm 2025",
+    project: "Vault MCP",
+    desc: "Built at FeatureForm 2025 — details coming soon.",
+    href: "https://lnkd.in/p/gnMEa54m",
+    award: "3rd Place",
+  },
+  {
+    event: "HackTech 2024",
+    project: "CodeNotes",
+    desc: "Built at HackTech 2024 — notes for code, demos, and snippets. See Devpost for stack, demo, and team.",
+    href: "https://devpost.com/software/codenotes",
+  },
+  {
+    event: "TreeHacks 2024",
+    project: "GitFlow",
+    desc: "Built at TreeHacks 2024 — Git workflow visualizer / helper. See Devpost for stack, demo, and team.",
+    href: "https://devpost.com/software/gitflow",
+  },
+  {
+    event: "CalHacks 10.0",
+    project: "Speech Master",
+    desc: "Built at CalHacks 10.0 — speech practice and feedback tool. See Devpost for stack, demo, and team.",
+    href: "https://devpost.com/software/speech-master",
+    award: "2nd Place",
+  },
+  {
+    event: "CitrusHack 2023",
+    project: "US in R Land",
+    desc: "Built at CitrusHack 2023 — playful data / AR experiment. See Devpost for stack, demo, and team.",
+    href: "https://devpost.com/software/us-in-r-land",
+    award: "2nd Place",
+  },
+  {
+    event: "RoseHack 2022",
+    project: "Taskmaster",
+    desc: "Built at RoseHack 2022 — task management helper. See Devpost for stack, demo, and team.",
+    href: "https://devpost.com/software/taskmaster-pd8joz",
+  },
+  {
+    event: "Matador Hacks 2019",
+    project: "Mental Disorder Awareness",
+    desc: "Built at Matador Hacks 2019 — awareness and support experience. See Devpost for stack, demo, and team.",
+    href: "https://devpost.com/software/mental-disorder-awareness",
+  },
+];
+
+// Ordered oldest → newest. Same-year tie-break: RoseHack → CitrusHack → CutieHack;
+// other same-year events keep their existing relative order.
+const organizedEvents = [
+  {
+    event: "RoseHack 2023",
+    role: "Software Lead",
+    desc: "Led software for RoseHack 2023 — introduced the QR check-in system now used across UCR hackathons.",
+  },
+  {
+    event: "CutieHack 2023",
+    role: "Software Lead",
+    desc: "Led software for CutieHack 2023 — introduced Aurora, the Discord bot, Google Calendar schedules, and slide templates.",
+  },
+  {
+    event: "RoseHack 2024",
+    role: "Software Lead",
+    desc: "Led software for RoseHack 2024 — introduced Hack Week and federated judging.",
+  },
+  {
+    event: "DesignVerse 2024",
+    role: "Software Lead",
+    desc: "Led software for DesignVerse 2024.",
+  },
+  {
+    event: "BearHack 2024",
+    role: "Software Lead",
+    desc: "Led software for BearHack 2024.",
+  },
+  {
+    event: "DesignVerse 2025",
+    role: "Software Lead",
+    desc: "Led software for DesignVerse 2025.",
+  },
+  {
+    event: "FeatureForm 2025",
+    role: "Software Lead",
+    desc: "Led software for FeatureForm 2025.",
+  },
+];
+
+// Ordered oldest → newest. Same-year tie-break: RoseHack → CitrusHack → CutieHack;
+// other same-year events keep their existing relative order.
+const judgedProjects = [
+  {
+    event: "CutieHack 2022",
+    role: "Judge",
+    desc: "Judged projects at CutieHack 2022.",
+  },
+  {
+    event: "Vikings Hacks 2024",
+    role: "Judge",
+    desc: "Judged projects at Vikings Hacks 2024.",
+  },
+  {
+    event: "CutieHack 2024",
+    role: "Judge",
+    desc: "Judged projects at CutieHack 2024.",
+  },
+  {
+    event: "Vikings Hacks 2025",
+    role: "Judge",
+    desc: "Judged projects at Vikings Hacks 2025.",
+  },
+  {
+    event: "CutieHack 2025",
+    role: "Judge",
+    desc: "Judged projects at CutieHack 2025.",
+  },
+  {
+    event: "Vikings Hacks 2026",
+    role: "Judge",
+    desc: "Judged projects at Vikings Hacks 2026.",
+  },
+  {
+    event: "Palo Alto Hacks 2026",
+    role: "Judge",
+    desc: "Judged projects at Palo Alto Hacks 2026.",
+  },
+  {
+    event: "HackDavis 2026",
+    role: "Judge",
+    desc: "Judged projects at HackDavis 2026.",
+  },
+];
+
+// Small per-section galleries — drop in a photo by adding `src` / `alt` to an item.
+const organizedGallery = [
+  { title: "ROSEHACK 2023", caption: "Add a photo — the QR check-in system going live." },
+  { title: "CUTIEHACK 2023", caption: "Add a photo — Aurora and the Discord bot in action." },
+  { title: "ROSEHACK 2024", caption: "Add a photo — Hack Week and federated judging in motion." },
+];
+
+const judgedGallery = [
+  { title: "CUTIEHACK 2025", caption: "Add a photo — reviewing submissions with the judging team." },
+  { title: "VIKINGS HACKS 2025", caption: "Add a photo — scoring sheets and judge deliberations." },
+  { title: "HACKDAVIS 2026", caption: "Add a photo — announcing the winners on stage." },
+];
+
+// Hackathons / designathons running Aurora (source: ACM@UCR Aurora page — "Used in").
+const auroraHackathons = [
+  "CutieHack 2023",
+  "CutieHack 2024",
+  "CutieHack 2025",
+  "CitrusHack 2025",
+  "RoseHack 2024",
+  "RoseHack 2025",
+  "DesignVerse 2024",
+  "DesignVerse 2025",
+];
+
+// Quick analytics for the HACKATHONS section — ordered to match the page sections below:
+// attended → judged → organized → Aurora used in. Counts derive from the lists above.
+const hackathonStats = [
+  { value: String(attendedProjects.length), label: "Attended" },
+  { value: String(judgedProjects.length), label: "Judged" },
+  { value: String(organizedEvents.length), label: "Helped organize" },
+  { value: String(auroraHackathons.length), label: "Aurora used in" },
+];
+---
+<Layout title="Hackathons — Divyank Shah" description="Attended, judged, and organized hackathons.">
+  <TopBar showName />
+  <Masthead word="HACKATHONS" label="BUILD + JUDGE" />
+  <SectionNav active="Hackathons" />
+  <main>
+    <HairlineSection>
+      <Reveal><SectionHeadingRow title="Hackathons" copy="Attendee, judge, and organizer — quick numbers across the hackathons I have been part of." /></Reveal>
+      <Reveal delay={0.04}>
+        <StatsBar stats={hackathonStats} note="" />
+      </Reveal>
+    </HairlineSection>
+    <HairlineSection>
+      <Reveal><SectionHeadingRow title="Attended Projects" copy="What I built at each hackathon — most recent first, winners highlighted with their placement." /></Reveal>
+      <div class="mt-10 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+        {attendedProjects.map((item) => (
+          <Reveal>
+            <article class="hairline relative flex h-full flex-col p-6">
+              <div class="flex min-h-7 items-start justify-between gap-3">
+                <p class="text-xs uppercase tracking-wide text-ink-muted">{item.event}</p>
+                {item.award && (
+                  <p class="inline-flex w-fit shrink-0 items-center gap-1 border border-line px-2 py-1 text-xs font-medium uppercase tracking-wide">★ {item.award}</p>
+                )}
+              </div>
+              <h3 class="mt-2 text-lg font-medium">{item.project}</h3>
+              <p class="mt-2 text-sm leading-relaxed text-ink-muted">{item.desc}</p>
+              <a href={item.href} target="_blank" rel="noreferrer" class="mt-4 inline-flex items-center gap-1.5 text-sm underline">
+                <LinkIcon href={item.href} class="h-4 w-4" />
+                {item.href.includes("devpost.com") ? "View on Devpost ↗" : "View post ↗"}
+              </a>
+            </article>
+          </Reveal>
+        ))}
+      </div>
+    </HairlineSection>
+    <HairlineSection>
+      <Reveal><SectionHeadingRow title="Judged Projects" copy="Events I've judged — reviewing submissions, scoring projects, and celebrating the winners." /></Reveal>
+      <div class="mt-10 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+        {judgedProjects.map((item) => (
+          <Reveal>
+            <article class="hairline relative flex h-full flex-col p-6">
+              <p class="text-xs uppercase tracking-wide text-ink-muted">{item.role}</p>
+              <h3 class="mt-2 text-lg font-medium">{item.event}</h3>
+              <p class="mt-2 text-sm leading-relaxed text-ink-muted">{item.desc}</p>
+            </article>
+          </Reveal>
+        ))}
+      </div>
+      <Reveal delay={0.04}>
+        <div class="mt-10">
+          <Gallery items={judgedGallery} />
+        </div>
+      </Reveal>
+    </HairlineSection>
+    <HairlineSection>
+      <Reveal><SectionHeadingRow title="Organized Hackathons" copy="Events I've led as software lead — from QR check-in and Aurora to Hack Week and federated judging." /></Reveal>
+      <div class="mt-10 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+        {organizedEvents.map((item) => (
+          <Reveal>
+            <article class="hairline relative flex h-full flex-col p-6">
+              <p class="text-xs uppercase tracking-wide text-ink-muted">{item.role}</p>
+              <h3 class="mt-2 text-lg font-medium">{item.event}</h3>
+              <p class="mt-2 text-sm leading-relaxed text-ink-muted">{item.desc}</p>
+            </article>
+          </Reveal>
+        ))}
+      </div>
+      <Reveal delay={0.04}>
+        <div class="mt-10">
+          <Gallery items={organizedGallery} />
+        </div>
+      </Reveal>
+    </HairlineSection>
+    <HairlineSection>
+      <Reveal><SectionHeadingRow title="Aurora / Minerva" copy="Things I introduced at one hackathon that are now used across UCR hackathons." /></Reveal>
+      <div class="mt-10 grid grid-cols-1 gap-6 md:grid-cols-2">
+        <Reveal delay={0.06}><article class="hairline p-6"><h3 class="font-medium">What I introduced</h3><ul class="mt-3 list-disc space-y-1 pl-5 text-sm text-ink-muted"><li>QR check-in (Rosehack 2023) · Hack Week (Rosehack 2024)</li><li>Federated judging (Rosehack 2024) · GCal schedule (Cutiehack 2023)</li><li>Aurora + Discord bot + slides templates (Cutiehack 2023)</li></ul></article></Reveal>
+      </div>
+    </HairlineSection>
+  </main>
+  <Footer />
+</Layout>

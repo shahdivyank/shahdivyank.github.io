@@ -1,0 +1,47 @@
+---
+interface Props {
+  delay?: number;
+  y?: number;
+  class?: string;
+}
+const { delay = 0, y = 16, class: cls = "" } = Astro.props;
+---
+<div class={`reveal ${cls}`} data-reveal data-delay={delay} data-y={y}>
+  <slot />
+</div>
+<script>
+  import { animate, inView } from "motion";
+  function initReveals() {
+    const els = document.querySelectorAll("[data-reveal]:not([data-reveal-init])");
+    els.forEach((el) => {
+      el.setAttribute("data-reveal-init", "true");
+      const delay = parseFloat(el.getAttribute("data-delay") || "0");
+      const y = parseFloat(el.getAttribute("data-y") || "16");
+      const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      if (reduce) return;
+      (el as HTMLElement).style.opacity = "0";
+      (el as HTMLElement).style.transform = `translateY(${y}px)`;
+      inView(el, () => {
+        animate(
+          el as HTMLElement,
+          { opacity: [0, 1], transform: [`translateY(${y}px)`, "translateY(0px)"] },
+          { duration: 0.6, delay, easing: "ease-out" }
+        );
+        return () => {};
+      }, { amount: 0.2, margin: "-40px" });
+    });
+  }
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initReveals);
+  } else {
+    initReveals();
+  }
+  // Re-run for client-side navigations
+  document.addEventListener("astro:page-load", initReveals);
+</script>
+<style>
+  .reveal { will-change: opacity, transform; }
+  @media (prefers-reduced-motion: reduce) {
+    .reveal { opacity: 1 !important; transform: none !important; }
+  }
+</style>

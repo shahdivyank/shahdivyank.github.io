@@ -1,0 +1,145 @@
+---
+import Layout from "../layouts/Layout.astro";
+import TopBar from "../components/site/TopBar.astro";
+import SectionNav from "../components/site/SectionNav.astro";
+import Masthead from "../components/site/Masthead.astro";
+import HairlineSection from "../components/site/HairlineSection.astro";
+import SectionHeadingRow from "../components/site/SectionHeadingRow.astro";
+import Reveal from "../components/site/Reveal.astro";
+import ConcertCarousel from "../components/site/ConcertCarousel.astro";
+import Footer from "../components/site/Footer.astro";
+
+const concerts = [
+  { artist: "LE SSERAFIM", date: "Sep 23 2026", venue: "SAP Center", city: "San Jose" },
+  { artist: "IVE", date: "Aug 4 2026", venue: "Oakland Arena", city: "Oakland" },
+  { artist: "TWICE", date: "Jan 18 2026", venue: "Oakland Arena", city: "Oakland" },
+  { artist: "LE SSERAFIM", date: "Sep 14 2025", venue: "Bill Graham Civic Center", city: "San Francisco" },
+  { artist: "BABY MONSTER", date: "Sep 10 2025", venue: "Oakland Arena", city: "Oakland" },
+  { artist: "JENNIE", date: "Mar 6 2025", venue: "Peacock Theater", city: "Los Angeles" },
+  { artist: "aespa", date: "Feb 1 2025", venue: "Kia Forum", city: "Los Angeles" },
+  { artist: "KISS OF LIFE", date: "Dec 3 2024", venue: "The Novo", city: "Los Angeles" },
+  { artist: "(G)I-DLE", date: "Sep 8 2024", venue: "Oakland Arena", city: "Oakland" },
+  { artist: "CHUU", date: "Jul 19 2024", venue: "Palace of Fine Arts", city: "San Francisco" },
+  { artist: "MADISON BEER", date: "Jun 13 2024", venue: "Greek Theater", city: "Los Angeles" },
+  { artist: "ITZY", date: "Jun 11 2024", venue: "Kia Forum", city: "Los Angeles" },
+  { artist: "aespa", date: "Aug 27 2023", venue: "MGM National Harbor", city: "Washington, D.C." },
+  { artist: "(G)I-DLE", date: "Aug 13 2023", venue: "Madison Square Garden", city: "New York" },
+  { artist: "BLACKPINK", date: "Aug 12 2023", venue: "MetLife Stadium", city: "East Rutherford" },
+  { artist: "KARD", date: "Jul 17 2023", venue: "Madison Square Garden", city: "New York" },
+  { artist: "TWICE", date: "Jun 10 2023", venue: "SoFi Stadium", city: "Los Angeles" },
+  { artist: "BLACKPINK", date: "Nov 19 2022", venue: "Banc of California", city: "Los Angeles" },
+  { artist: "ITZY", date: "Oct 29 2022", venue: "Finance Theater", city: "Arizona" },
+  { artist: "KARD", date: "Aug 24 2022", venue: "San Jose Civic", city: "San Jose" },
+];
+
+// Songs on repeat — Spotify embeds, transcribed from specs/music.md.
+// `title` / `artist` aren't rendered (the player shows them); they only feed
+// the iframe's accessible `title` attribute.
+const songs = [
+  { title: "Ash", artist: "LE SSERAFIM", embed: "https://open.spotify.com/embed/track/5o4U0weUIAXolji4sEAnjI?utm_source=generator&theme=0&si=8d97a70ab97a4a96" },
+  { title: "right where you left me - bonus track", artist: "Taylor Swift", embed: "https://open.spotify.com/embed/track/3zwMVvkBe2qIKDObWgXw4N?utm_source=generator&theme=0&si=3abeaeecf3f142b3" },
+  { title: "like JENNIE", artist: "Jennie", embed: "https://open.spotify.com/embed/track/0fK7ie6XwGxQTIkpFoWkd1?utm_source=generator&theme=0&si=48d94461ea86454c" },
+  { title: "I DO", artist: "i-dle", embed: "https://open.spotify.com/embed/track/23z04slx9PgvUYCOKkd27X?utm_source=generator&theme=0&si=00f48757070446a2" },
+  { title: "Video Games", artist: "Lana Del Ray", embed: "https://open.spotify.com/embed/track/24jvD83UgLmrdGjhWTFslY?utm_source=generator&theme=0&si=8805899ade8848b3" },
+  { title: "BOTTLE$", artist: "VVS", embed: "https://open.spotify.com/embed/track/4iq1lGqYtWldYMIde5YecM?utm_source=generator&theme=0&si=8828ad240a714fd2" },
+  { title: "Pink Lips", artist: "Meet Bros Anjjan, Khushboo Grewal", embed: "https://open.spotify.com/embed/track/2tyITgmOGVz6rqleDokbEN?utm_source=generator&theme=0&si=360fd8298a6f4671" },
+  { title: "Toota Jo Kabhi Tara", artist: "Sumedha Karmahe, Atif Aslam", embed: "https://open.spotify.com/embed/track/2xLaYf6XYIFz3tuUJjELAs?utm_source=generator&theme=0&si=6f0c0dc5e4a04d40" },
+  { title: "Cocoon", artist: "070 Shake", embed: "https://open.spotify.com/embed/track/069mlD5el7f9hcN4Wh4YXb?utm_source=generator&theme=0&si=aa168c0f519f49cc" },
+];
+
+// Concert gallery: every concert gets a carousel slide with 2–3 photo slots.
+// Add real photos later by setting `src` (and optional `alt`) on a slot,
+// e.g. { src: "/images/concerts/le-sserafim-1.jpg", alt: "…" } — until then a
+// placeholder renders automatically.
+type Ratio = "landscape" | "logo" | "portrait";
+type Photo = { src?: string; alt?: string; ratio: Ratio };
+type GalleryEntry = { artist: string; place: string; date: string; photos: Photo[] };
+
+// Hand-tuned photo layouts, keyed by "artist|date". Anything not listed here
+// falls back to the alternating placeholder layout below.
+const customLayouts = new Map<string, Photo[]>([
+  ["LE SSERAFIM|Sep 23 2026", [{ ratio: "portrait" }, { ratio: "landscape" }, { ratio: "landscape" }]],
+  ["IVE|Aug 4 2026", [{ ratio: "landscape" }, { ratio: "portrait" }]],
+  ["BABY MONSTER|Sep 10 2025", [{ ratio: "landscape" }, { ratio: "landscape" }, { ratio: "portrait" }]],
+  ["BLACKPINK|Aug 12 2023", [{ ratio: "portrait" }, { ratio: "landscape" }]],
+]);
+
+const placeholderPhotos = (count: number, offset: number): Photo[] =>
+  Array.from({ length: count }, (_, index) => ({
+    ratio: (index + offset) % 3 === 0 ? "portrait" : "landscape",
+  }));
+
+const gallery: GalleryEntry[] = concerts.map((concert, index) => {
+  const key = `${concert.artist}|${concert.date}`;
+  const photos = customLayouts.get(key) ?? placeholderPhotos(index % 2 === 0 ? 3 : 2, index);
+  return {
+    artist: concert.artist,
+    place: `${concert.venue} · ${concert.city}`,
+    date: concert.date,
+    photos,
+  };
+});
+---
+<Layout title="Music — Divyank Shah" description="Songs on repeat and concert history.">
+  <TopBar showName />
+  <Masthead word="MUSIC" label="LIVE + LISTENING" />
+  <SectionNav active="Music" />
+  <main>
+    <HairlineSection>
+      <Reveal>
+        <SectionHeadingRow
+          title="Top Picks"
+          copy={`${songs.length} of my top picks — press play, then ${concerts.length} concerts below.`}
+        />
+      </Reveal>
+
+      <Reveal>
+        <div class="mt-10 grid grid-cols-1 gap-4 md:grid-cols-3">
+          {songs.map((song) => (
+            <iframe
+              data-testid="embed-iframe"
+              style="border-radius:12px"
+              src={song.embed}
+              width="100%"
+              height="152"
+              frameborder="0"
+              allowfullscreen
+              allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+              loading="lazy"
+              title={`${song.title} — ${song.artist}`}
+            ></iframe>
+          ))}
+        </div>
+      </Reveal>
+    </HairlineSection>
+
+    <HairlineSection id="concerts">
+      <Reveal>
+        <SectionHeadingRow title="Concerts" copy="Every show, in reverse chronological order." />
+      </Reveal>
+      <Reveal>
+        <div class="mt-10 border-t border-line">
+          {concerts.map((concert) => (
+            <article class="grid grid-cols-1 gap-2 border-b border-line py-5 sm:grid-cols-12 sm:gap-6">
+              <h3 class="text-lg font-medium sm:col-span-4">{concert.artist}</h3>
+              <p class="text-sm font-medium sm:col-span-1">{concert.date.slice(-4)}</p>
+              <p class="text-sm sm:col-span-2">{concert.date.slice(0, -5)}</p>
+              <p class="text-sm text-ink-muted sm:col-span-2">{concert.venue}</p>
+              <p class="text-sm text-ink-muted sm:col-span-3">{concert.city}</p>
+            </article>
+          ))}
+        </div>
+      </Reveal>
+    </HairlineSection>
+
+    <HairlineSection id="concert-gallery">
+      <Reveal>
+        <SectionHeadingRow title="Concert Gallery" copy="Photographs from the stage, the crowd, and the road." />
+      </Reveal>
+      <Reveal>
+        <ConcertCarousel entries={gallery} />
+      </Reveal>
+    </HairlineSection>
+  </main>
+  <Footer />
+</Layout>

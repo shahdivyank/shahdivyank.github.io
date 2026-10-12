@@ -1,0 +1,72 @@
+---
+interface Props {
+  word?: string;
+  label?: string;
+  side?: string;
+}
+const { word = "DIVYANK", label = "PORTFOLIO", side = "" } = Astro.props;
+const chars = word.split("");
+// Scale down long words so single-line masthead never overflows at 360px
+const len = word.length;
+const vw = len <= 7 ? "17vw" : len <= 9 ? "13vw" : len <= 11 ? "10.5vw" : "8.5vw";
+const mastheadSize = `clamp(2.5rem, ${vw}, 16rem)`;
+---
+<div class="gutter w-full overflow-hidden pb-2 pt-8 md:pt-12">
+  <div class="flex items-end justify-between gap-6">
+    <h1 aria-label={side ? `${word} ${side}` : word} class="masthead m-0 max-w-full whitespace-nowrap" style={`font-size:${mastheadSize}`} data-masthead>
+      {
+        chars.map((c) => (
+          <span aria-hidden="true" data-masthead-char class="inline-block will-change-transform">
+            {c}
+          </span>
+        ))
+      }
+      <span class="sr-only">{side ? `${word} ${side}` : word}</span>
+    </h1>
+    {side && (
+      <span aria-hidden="true" data-masthead-side class="mb-2 shrink-0 text-right font-medium uppercase leading-none tracking-[-0.02em] text-ink md:mb-4" style="font-size: clamp(1.5rem, 4vw, 3.5rem);">
+        {side}
+      </span>
+    )}
+  </div>
+  <div class="mt-3 flex justify-end">
+    <p class="text-sm font-semibold uppercase tracking-wide" data-masthead-label>{label}</p>
+  </div>
+</div>
+
+<script>
+  import { animate, stagger } from "motion";
+  try {
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const chars = document.querySelectorAll("[data-masthead-char]");
+    const label = document.querySelector("[data-masthead-label]");
+    const side = document.querySelector("[data-masthead-side]");
+    if (!reduce && chars.length) {
+      animate(
+        chars,
+        { opacity: [0, 1], y: ["0.35em", "0em"] },
+        { duration: 0.6, easing: "ease-out", delay: stagger(0.045) }
+      );
+      if (label) {
+        animate(label, { opacity: [0, 1], y: [8, 0] }, { duration: 0.5, delay: 0.35, easing: "ease-out" });
+      }
+      if (side) {
+        animate(side, { opacity: [0, 1], y: [10, 0] }, { duration: 0.55, delay: 0.25, easing: "ease-out" });
+      }
+    } else {
+      chars.forEach((c) => { ((c as HTMLElement).style.opacity = "1"); });
+    }
+  } catch {
+    document.querySelectorAll("[data-masthead-char]").forEach((c) => { ((c as HTMLElement).style.opacity = "1"); });
+  }
+</script>
+<style>
+  .sr-only {
+    position: absolute;
+    width: 1px; height: 1px;
+    overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap;
+  }
+  [data-masthead-char] {
+    opacity: 1;
+  }
+</style>

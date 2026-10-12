@@ -1,0 +1,38 @@
+---
+import Layout from "../layouts/Layout.astro";
+import TopBar from "../components/site/TopBar.astro";
+import SectionNav from "../components/site/SectionNav.astro";
+import Masthead from "../components/site/Masthead.astro";
+import HairlineSection from "../components/site/HairlineSection.astro";
+import SectionHeadingRow from "../components/site/SectionHeadingRow.astro";
+import InfoPanel from "../components/site/InfoPanel.astro";
+import Button from "../components/site/Button.astro";
+import Footer from "../components/site/Footer.astro";
+---
+<Layout title="About — Divyank Shah" description="About, now, uses, contact.">
+  <TopBar showName />
+  <Masthead word="ABOUT" label="PROFILE" />
+  <SectionNav active="About" />
+  <main>
+    <HairlineSection>
+      <SectionHeadingRow titleA="About" titleB="Me" copy="Short bio in muted body copy, max 60ch. Replace this paragraph with your real story." ctaLabel="Contact" ctaHref="#contact" />
+      <div class="mt-10 grid grid-cols-1 gap-6 md:grid-cols-3">
+        <InfoPanel title="Now" rows={[{label:"Location", value:"[City]"}, {label:"Focus", value:"[Focus]"}, {label:"Reading", value:"[Book]"}]} />
+        <InfoPanel title="Uses" rows={[{label:"Editor", value:"VS Code"}, {label:"Stack", value:"Astro + TS"}, {label:"Design", value:"Figma"}]} />
+        <div id="contact">
+        <InfoPanel title="Contact" rows={[{label:"Email", value:"[email]"}, {label:"GitHub", value:"shahdivyank"}, {label:"Cal", value:"[link]"}]}>
+          <Button href="mailto:hello@example.com">Email Me</Button>
+        </InfoPanel>
+        </div>
+      </div>
+    </HairlineSection>
+    <HairlineSection id="contact">
+      <SectionHeadingRow titleA="Find me" titleB="Online" copy="Dashed-border boxes with dotted-leader rows per spec §6.13." ctaLabel="Home" ctaHref="/" />
+      <div class="mt-10 grid grid-cols-1 gap-6 md:grid-cols-2">
+        <InfoPanel title="Elsewhere" rows={[{label:"GitHub", value:"shahdivyank"}, {label:"LinkedIn", value:"divyank-shah"}]} />
+        <InfoPanel title="Resume" rows={[{label:"PDF", value:"[link]"}, {label:"Last updated", value:"2026-01"}]} />
+      </div>
+    </HairlineSection>
+  </main>
+  <Footer />
+</Layout>

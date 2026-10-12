@@ -1,0 +1,22 @@
+---
+import Button from "./Button.astro";
+interface Props {
+  title?: string;
+  titleA?: string;
+  titleB?: string;
+  copy?: string;
+  ctaLabel?: string;
+  ctaHref?: string;
+  ctaIcon?: boolean;
+}
+const { title, titleA = "Featured", titleB = "Work", copy = "Selected projects — design, engineering, and writing.", ctaLabel, ctaHref, ctaIcon = false } = Astro.props;
+// Single-line title: prefer `title`, else join legacy titleA + titleB
+const single = (title ?? `${titleA} ${titleB}`.trim()).replace(/\s+/g, " ");
+---
+<div class="grid grid-cols-4 gap-8 lg:grid-cols-12">
+  <h2 class="h2-editorial col-span-4 whitespace-nowrap lg:col-span-7">{single}</h2>
+  <div class="col-span-4 flex flex-col items-start justify-end gap-5 lg:col-span-5">
+    <p class="body-editorial">{copy}</p>
+    {ctaLabel && <Button href={ctaHref} icon={ctaIcon}>{ctaLabel}</Button>}
+  </div>
+</div>

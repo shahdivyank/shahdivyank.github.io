@@ -1,0 +1,33 @@
+---
+interface Stat { value: string; label: string; }
+interface Props { stats?: Stat[]; note?: string }
+const {
+  stats = [
+    { value: "12+", label: "Projects shipped" },
+    { value: "4", label: "Years building" },
+    { value: "20+", label: "Writing posts" },
+  ],
+  note = "Replace with your real numbers — placeholders until confirmed.",
+} = Astro.props;
+// 4+ stats: stack until lg, then one row of 4 (4-across at sm would be too narrow
+// for the number + label to sit side by side).
+const wide = stats.length >= 4;
+const colsClass = wide
+  ? "lg:grid-cols-4"
+  : stats.length <= 1
+    ? "sm:grid-cols-1"
+    : stats.length === 2
+      ? "sm:grid-cols-2"
+      : "sm:grid-cols-3";
+const dividerClass = wide ? "lg:border-l lg:border-t-0" : "sm:border-l sm:border-t-0";
+---
+<dl class:list={["grid grid-cols-1 border border-line", colsClass]}>
+  {stats.map((s, i) => (
+    <div class:list={["flex items-baseline gap-3 px-6 py-6", i > 0 ? ["border-t border-line", dividerClass] : ""]}>
+      <dt class="order-2 text-sm text-ink-muted">{s.label}</dt>
+      <dd class="order-1 text-[3.5rem] font-medium leading-none">{s.value}</dd>
+    </div>
+  ))}
+</dl>
+{note ? <p class="mt-2 text-xs text-ink-muted">{note}</p> : null}
+

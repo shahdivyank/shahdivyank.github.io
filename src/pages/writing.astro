@@ -1,0 +1,24 @@
+---
+import Layout from "../layouts/Layout.astro";
+import TopBar from "../components/site/TopBar.astro";
+import SectionNav from "../components/site/SectionNav.astro";
+import Masthead from "../components/site/Masthead.astro";
+import HairlineSection from "../components/site/HairlineSection.astro";
+import SectionHeadingRow from "../components/site/SectionHeadingRow.astro";
+import Timeline from "../components/site/Timeline.astro";
+import DarkSplit from "../components/site/DarkSplit.astro";
+import Footer from "../components/site/Footer.astro";
+---
+<Layout title="Writing — Divyank Shah" description="Essays and notes.">
+  <TopBar showName />
+  <Masthead word="WRITING" label="ESSAYS & NOTES" />
+  <SectionNav active="Writing" />
+  <main>
+    <HairlineSection>
+      <SectionHeadingRow titleA="Decoding" titleB="Ideas" copy="Vertical date accordion on desktop, stacked list on mobile. Keyboard: tab + arrows." ctaLabel="Home" ctaHref="/" />
+      <div class="mt-10"><Timeline /></div>
+    </HairlineSection>
+    <DarkSplit vertical="Decoding" quote="Long-form thinking on systems, craft, and tools." giant="ESSAYS" />
+  </main>
+  <Footer />
+</Layout>

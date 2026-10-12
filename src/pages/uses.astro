@@ -1,0 +1,24 @@
+---
+import Layout from "../layouts/Layout.astro";
+import TopBar from "../components/site/TopBar.astro";
+import SectionNav from "../components/site/SectionNav.astro";
+import Masthead from "../components/site/Masthead.astro";
+import HairlineSection from "../components/site/HairlineSection.astro";
+import InfoPanel from "../components/site/InfoPanel.astro";
+import Footer from "../components/site/Footer.astro";
+---
+<Layout title="Uses — Divyank Shah">
+  <TopBar showName />
+  <Masthead word="USES" label="TOOLKIT" />
+  <SectionNav active="Uses" />
+  <main>
+    <HairlineSection>
+      <div class="grid grid-cols-1 gap-6 md:grid-cols-3">
+        <InfoPanel title="Setup" rows={[{label:"Machine", value:"[Mac]"}, {label:"Editor", value:"VS Code"}, {label:"Terminal", value:"[Terminal]"}]} />
+        <InfoPanel title="Stack" rows={[{label:"Site", value:"Astro"}, {label:"Style", value:"Tailwind v4"}, {label:"Lang", value:"TypeScript"}]} />
+        <InfoPanel title="Design" rows={[{label:"Type", value:"Inter Tight"}, {label:"Tool", value:"Figma"}]} />
+      </div>
+    </HairlineSection>
+  </main>
+  <Footer />
+</Layout>

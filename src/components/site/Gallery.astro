@@ -1,0 +1,57 @@
+---
+import MediaPlaceholder from "./MediaPlaceholder.astro";
+
+type GalleryItem = {
+  src?: string;
+  alt?: string;
+  title: string;
+  caption: string;
+  width?: number;
+  height?: number;
+  ratio?: "landscape" | "square" | "portrait";
+};
+
+interface Props {
+  items: GalleryItem[];
+}
+
+const { items } = Astro.props;
+const matchingHeight = (title: string) => title === "JUDGING" || title === "PARTICIPATING";
+---
+
+<div class="grid grid-cols-1 gap-x-2 gap-y-4 md:grid-cols-12">
+  {items.map((item) => {
+    const isMatching = matchingHeight(item.title);
+    return (
+      <figure
+        class:list={[
+          "m-0",
+          item.title === "JUDGING" ? "md:col-span-7" : item.title === "PARTICIPATING" ? "md:col-span-5" : "md:col-span-4",
+          item.ratio === "square" && "md:col-span-5",
+          item.ratio === "landscape" && "md:col-span-7",
+          isMatching && "md:aspect-7/3",
+        ]}
+      >
+        {item.src ? (
+          <img
+            src={item.src}
+            alt={item.alt ?? ""}
+            width={item.width}
+            height={item.height}
+            class:list={[
+              "block w-full border border-line",
+              isMatching ? "h-full object-cover" : "h-auto",
+            ]}
+            loading="lazy"
+          />
+        ) : (
+          <MediaPlaceholder label={item.title} ratio={isMatching ? "landscape" : item.ratio ?? "landscape"} />
+        )}
+        <figcaption class="mt-2">
+          <p class="text-xs uppercase tracking-wide">{item.title}</p>
+          <p class="text-sm italic text-ink-muted">{item.caption}</p>
+        </figcaption>
+      </figure>
+    );
+  })}
+</div>
