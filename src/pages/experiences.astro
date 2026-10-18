@@ -8,12 +8,90 @@ import SectionHeadingRow from "../components/site/SectionHeadingRow.astro";
 import Reveal from "../components/site/Reveal.astro";
 import Footer from "../components/site/Footer.astro";
 
+const b4 = "https://research.google/pubs/b4-experience-with-a-globally-deployed-software-defined-wan/";
+const ebb = "https://dl.acm.org/doi/10.1145/3603269.3604860";
+const swan = "https://www.microsoft.com/en-us/research/publication/achieving-high-utilization-with-software-driven-wan/";
+const faiss = "https://github.com/facebookresearch/faiss";
+const firex = "https://github.com/FireXStuff";
+const miniLM = "https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2";
+const farmerBoys = "https://www.farmerboys.com";
+const worldpay = "https://docs.worldpay.com";
+const mend = "https://www.mend.io/mend-platform/";
+const concourse = "https://concourse-ci.org";
+const stackstorm = "https://stackstorm.com";
+
+/* An item is either a plain string or { runs: [{ text, href?] } } for inline links. */
 const experiences = [
-  { company: "Connected Signals", role: "Software Engineering Intern, Core Product", location: "Irvine, CA", dates: "May 2025 – Aug 2025", logo: "Connected Signals", logoSrc: "/images/logos/connected-signals-logo.jpeg", items: ["Migrated and redesigned Transit Signal Priority iOS React Native app to Expo enabling Android + iOS builds", "Created initial analytics dashboard via shadcn charts to showcase TSP and EVP system health", "Built Django Admin TSP/EVP device certificate dashboards to streamline certificate management"] },
-  { company: "Cisco", role: "Software Engineering Intern, Mass Scale Infrastructure", location: "San Jose, CA", dates: "Jul 2024 – Dec 2024", logo: "Cisco", logoSrc: "/images/logos/cisco-logo.png", items: ["Streamlined triage to label failures for Google B4, Meta EBB, Microsoft SWAN reducing manual effort 20%", "Used FAISS to index FireX logs and semantically search 3000+ documents", "Embedded test logs with all-MiniLM-L6-v2 + LangChain to build FAISS IndexFlatL2", "Built Next.js + TypeScript labeling dashboard over MongoDB aggregation pipeline", "Extended FireX plugins to parse + push XML logs to MongoDB"] },
-  { company: "Zybertech", role: "Software Engineering Intern, Core Product", location: "Simi Valley, CA", dates: "Apr 2024 – Sep 2024", logo: "Zybertech", logoSrc: "/images/logos/zybertech-logo.jpeg", items: ["Architected Android React Native Expo self-ordering kiosk for Farmer Boys pilot", "Rewrote file-based API cache to cut POS requests 80% with 24h retention", "Integrated Worldpay TriPOS via custom Kotlin wrapper for P2PE PCI payments", "Implemented 18+ screens for member + guest flows"] },
-  { company: "Comcast", role: "Smart Network Platform", location: "Philadelphia, PA", dates: "Jun 2023 – Sep 2023", logo: "Comcast", logoSrc: "/images/logos/comcast-logo.png", items: ["Upgraded Foresight web app Node 12 → 18 for perf + security", "Merged Express API with web app to cut containers 50% + boost perf 25%", "Improved validation API, Storybook webcomponents (10+ Mend alerts)", "Designed Slack VM telemetry + 4-panel Grafana / InfluxDB dashboard"] },
-  { company: "Comcast", role: "Next Generation Access Network", location: "Philadelphia, PA", dates: "Jun 2022 – Feb 2023", logo: "Comcast", logoSrc: "/images/logos/comcast-logo.png", items: ["Built 5+ Concourse pipelines for lint / format / test", "Computed event-triggered TTR for 1000+ daily alerts + React dashboard", "Migrated auto-remediation StackStorm → AWS Step Functions, standardized 50+ Python scripts", "Wrote 320+ PyTest tests (95% coverage, 15+ APIs)"] },
+  {
+    company: "Connected Signals",
+    role: "Software Engineering Intern, Core Product",
+    location: "Irvine, CA",
+    dates: "May 2025 – Aug 2025",
+    logo: "Connected Signals",
+    logoSrc: "/images/logos/connected-signals-logo.webp",
+    items: [
+      "Migrated and redesigned Transit Signal Priority iOS React Native app to Expo enabling Android + iOS builds",
+      "Created initial analytics dashboard via shadcn charts to showcase TSP and EVP system health",
+      "Built Django Admin TSP/EVP device certificate dashboards to streamline certificate management",
+    ],
+  },
+  {
+    company: "Cisco",
+    role: "Software Engineering Intern, Mass Scale Infrastructure",
+    location: "San Jose, CA",
+    dates: "Jul 2024 – Dec 2024",
+    logo: "Cisco",
+    logoSrc: "/images/logos/cisco-logo.webp",
+    items: [
+      { runs: [{ text: "Streamlined triage to label failures for " }, { text: "Google B4", href: b4 }, { text: ", " }, { text: "Meta EBB", href: ebb }, { text: ", " }, { text: "Microsoft SWAN", href: swan }, { text: " reducing manual effort 20%" }] },
+      { runs: [{ text: "Used " }, { text: "FAISS", href: faiss }, { text: " to index " }, { text: "FireX", href: firex }, { text: " logs and semantically search 3000+ documents" }] },
+      { runs: [{ text: "Embedded test logs with " }, { text: "all-MiniLM-L6-v2", href: miniLM }, { text: " + LangChain to build FAISS IndexFlatL2" }] },
+      "Built Next.js + TypeScript labeling dashboard over MongoDB aggregation pipeline",
+      { runs: [{ text: "Extended " }, { text: "FireX", href: firex }, { text: " plugins to parse + push XML logs to MongoDB" }] },
+    ],
+  },
+  {
+    company: "Zybertech",
+    role: "Software Engineering Intern, Core Product",
+    location: "Simi Valley, CA",
+    dates: "Apr 2024 – Sep 2024",
+    logo: "Zybertech",
+    logoSrc: "/images/logos/zybertech-logo.webp",
+    items: [
+      { runs: [{ text: "Architected Android React Native Expo self-ordering kiosk for " }, { text: "Farmer Boys", href: farmerBoys }, { text: " pilot" }] },
+      "Rewrote file-based API cache to cut POS requests 80% with 24h retention",
+      { runs: [{ text: "Integrated " }, { text: "Worldpay TriPOS", href: worldpay }, { text: " via custom Kotlin wrapper for P2PE PCI payments" }] },
+      "Implemented 18+ screens for member + guest flows",
+    ],
+  },
+  {
+    company: "Comcast",
+    role: "Smart Network Platform",
+    location: "Philadelphia, PA",
+    dates: "Jun 2023 – Sep 2023",
+    logo: "Comcast",
+    logoSrc: "/images/logos/comcast-logo.webp",
+    items: [
+      "Upgraded Foresight web app Node 12 → 18 for perf + security",
+      "Merged Express API with web app to cut containers 50% + boost perf 25%",
+      { runs: [{ text: "Improved validation API, Storybook webcomponents (10+ " }, { text: "Mend", href: mend }, { text: " alerts)" }] },
+      "Designed Slack VM telemetry + 4-panel Grafana / InfluxDB dashboard",
+    ],
+  },
+  {
+    company: "Comcast",
+    role: "Next Generation Access Network",
+    location: "Philadelphia, PA",
+    dates: "Jun 2022 – Feb 2023",
+    logo: "Comcast",
+    logoSrc: "/images/logos/comcast-logo.webp",
+    items: [
+      { runs: [{ text: "Built 5+ " }, { text: "Concourse", href: concourse }, { text: " pipelines for lint / format / test" }] },
+      "Computed event-triggered TTR for 1000+ daily alerts + React dashboard",
+      { runs: [{ text: "Migrated auto-remediation " }, { text: "StackStorm", href: stackstorm }, { text: " → AWS Step Functions, standardized 50+ Python scripts" }] },
+      "Wrote 320+ PyTest tests (95% coverage, 15+ APIs)",
+    ],
+  },
 ];
 ---
 <Layout title="Experiences — Divyank Shah" description="Work history across Connected Signals, Cisco, Zybertech, Comcast.">
@@ -31,7 +109,24 @@ const experiences = [
                 <div class="keep-round flex aspect-square h-20 w-20 shrink-0 items-center justify-center overflow-hidden border border-line bg-white">
                   <img src={experience.logoSrc} alt={experience.logo} class="keep-round h-full w-full object-cover" loading="lazy" />
                 </div>
-                <div class="min-w-0 flex-1"><div class="flex flex-wrap items-baseline justify-between gap-2"><h3 class="text-lg font-medium">{experience.company} — {experience.role}</h3><p class="text-xs uppercase tracking-wide text-ink-muted">{experience.location} · {experience.dates}</p></div><ul class="mt-3 list-disc space-y-1 pl-5 text-sm leading-relaxed text-ink-muted">{experience.items.map((item) => <li>{item}</li>)}</ul></div>
+                <div class="min-w-0 flex-1"><div class="flex flex-wrap items-baseline justify-between gap-2"><h3 class="text-lg font-medium">{experience.company} — {experience.role}</h3><p class="text-xs uppercase tracking-wide text-ink-muted">{experience.location} · {experience.dates}</p></div><ul class="mt-3 list-disc space-y-1 pl-5 text-sm leading-relaxed text-ink-muted">
+  {experience.items.map((item) => {
+    const runs = typeof item === "string" ? [{ text: item }] : item.runs;
+    return (
+      <li>
+        {runs.map((run) => (
+          run.href ? (
+            <a href={run.href} target="_blank" rel="noreferrer" class="underline font-bold">
+              {run.text}
+            </a>
+          ) : (
+            run.text
+          )
+        ))}
+      </li>
+    );
+  })}
+</ul></div>
               </div>
             </article>
           </Reveal>
