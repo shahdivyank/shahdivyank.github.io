@@ -16,17 +16,16 @@ interface Props {
   columns?: 3 | 4;
 }
 
-const { items = [], columns = 4 } = Astro.props;
+const { items = [], columns = 3 } = Astro.props;
 
 const ratioClass = (ratio: GalleryItem["ratio"] | undefined) => {
   switch (ratio) {
     case "portrait":
       return "md:aspect-3/4";
     case "square":
-      return "md:aspect-1/1";
     case "landscape":
     default:
-      return "md:aspect-16/10";
+      return "md:aspect-1/1";
   }
 };
 ---
@@ -52,7 +51,7 @@ const ratioClass = (ratio: GalleryItem["ratio"] | undefined) => {
           loading="lazy"
         />
       ) : (
-        <MediaPlaceholder label={item.title} ratio={item.ratio ?? "landscape"} />
+        <MediaPlaceholder label={item.title} ratio={item.ratio ?? "square"} />
       )}
       <figcaption class="mt-2">
         <p class="text-xs uppercase tracking-wide">{item.title}</p>
