@@ -1,8 +1,7 @@
 ---
 import MediaPlaceholder from "./MediaPlaceholder.astro";
 
-type Ratio = "landscape" | "logo" | "portrait";
-type Photo = { src?: string; alt?: string; ratio: Ratio };
+type Photo = { src?: string; alt?: string };
 type ConcertSlide = { artist: string; place: string; date: string; photos: Photo[] };
 
 interface Props {
@@ -48,13 +47,10 @@ const { entries } = Astro.props;
                     src={photo.src}
                     alt={photo.alt ?? `${concert.artist} at ${concert.place}, photo ${photoIndex + 1}`}
                     loading="lazy"
-                    class:list={[
-                      "w-full rounded-sm object-cover",
-                      photo.ratio === "portrait" ? "aspect-3/4" : photo.ratio === "logo" ? "aspect-square" : "aspect-16/10",
-                    ]}
+                    class="aspect-square w-full rounded-sm object-cover"
                   />
                 ) : (
-                  <MediaPlaceholder label={`${concert.artist} · Photo ${photoIndex + 1}`} ratio={photo.ratio} />
+                  <MediaPlaceholder label={`${concert.artist} · Photo ${photoIndex + 1}`} ratio="square" />
                 )}
                 <figcaption class="mt-2 text-xs uppercase tracking-wide text-ink-muted">
                   {photo.src ? `Photo ${photoIndex + 1}` : "Photo placeholder"}
@@ -265,13 +261,3 @@ const { entries } = Astro.props;
     render();
   });
 </script>
-</parameter>
-<task_progress>
-- [x] Locate concert gallery code
-- [x] Review gallery components and existing carousel patterns
-- [x] Draft carousel plan
-- [ ] Create ConcertCarousel component
-- [ ] Wire carousel into music.astro
-- [ ] Build and verify
-</task_progress>
-</write_to_file>

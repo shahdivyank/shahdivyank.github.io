@@ -47,31 +47,28 @@ const songs = [
   { title: "Cocoon", artist: "070 Shake", embed: "https://open.spotify.com/embed/track/069mlD5el7f9hcN4Wh4YXb?utm_source=generator&theme=0&si=aa168c0f519f49cc" },
 ];
 
-// Concert gallery: every concert gets a carousel slide with 2–3 photo slots.
-// Add real photos later by setting `src` (and optional `alt`) on a slot,
+// Concert gallery: every concert gets a carousel slide with 2–3 square photo
+// slots. Add real photos later by setting `src` (and optional `alt`) on a slot,
 // e.g. { src: "/images/concerts/le-sserafim-1.jpg", alt: "…" } — until then a
 // placeholder renders automatically.
-type Ratio = "landscape" | "logo" | "portrait";
-type Photo = { src?: string; alt?: string; ratio: Ratio };
+type Photo = { src?: string; alt?: string };
 type GalleryEntry = { artist: string; place: string; date: string; photos: Photo[] };
 
-// Hand-tuned photo layouts, keyed by "artist|date". Anything not listed here
-// falls back to the alternating placeholder layout below.
-const customLayouts = new Map<string, Photo[]>([
-  ["LE SSERAFIM|Sep 23 2026", [{ ratio: "portrait" }, { ratio: "landscape" }, { ratio: "landscape" }]],
-  ["IVE|Aug 4 2026", [{ ratio: "landscape" }, { ratio: "portrait" }]],
-  ["BABY MONSTER|Sep 10 2025", [{ ratio: "landscape" }, { ratio: "landscape" }, { ratio: "portrait" }]],
-  ["BLACKPINK|Aug 12 2023", [{ ratio: "portrait" }, { ratio: "landscape" }]],
+// Hand-tuned photo counts, keyed by "artist|date". Anything not listed here
+// falls back to the alternating count below.
+const customPhotoCounts = new Map<string, number>([
+  ["LE SSERAFIM|Sep 23 2026", 3],
+  ["IVE|Aug 4 2026", 2],
+  ["BABY MONSTER|Sep 10 2025", 3],
+  ["BLACKPINK|Aug 12 2023", 2],
 ]);
 
-const placeholderPhotos = (count: number, offset: number): Photo[] =>
-  Array.from({ length: count }, (_, index) => ({
-    ratio: (index + offset) % 3 === 0 ? "portrait" : "landscape",
-  }));
+const placeholderPhotos = (count: number): Photo[] =>
+  Array.from({ length: count }, () => ({}));
 
 const gallery: GalleryEntry[] = concerts.map((concert, index) => {
   const key = `${concert.artist}|${concert.date}`;
-  const photos = customLayouts.get(key) ?? placeholderPhotos(index % 2 === 0 ? 3 : 2, index);
+  const photos = placeholderPhotos(customPhotoCounts.get(key) ?? (index % 2 === 0 ? 3 : 2));
   return {
     artist: concert.artist,
     place: `${concert.venue} · ${concert.city}`,

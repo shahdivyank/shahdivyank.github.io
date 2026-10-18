@@ -17,17 +17,6 @@ interface Props {
 }
 
 const { items = [], columns = 3 } = Astro.props;
-
-const ratioClass = (ratio: GalleryItem["ratio"] | undefined) => {
-  switch (ratio) {
-    case "portrait":
-      return "md:aspect-3/4";
-    case "square":
-    case "landscape":
-    default:
-      return "md:aspect-1/1";
-  }
-};
 ---
 
 <div class={`grid grid-cols-1 gap-6 md:grid-cols-${columns} md:gap-8`}>
@@ -37,8 +26,6 @@ const ratioClass = (ratio: GalleryItem["ratio"] | undefined) => {
         "m-0 break-inside-avoid",
         columns === 4 && index === 0 ? "md:col-span-4" : null,
         columns === 4 && index !== 0 ? "md:col-span-2" : null,
-        item.ratio === "portrait" ? "md:row-span-2" : null,
-        ratioClass(item.ratio),
       ]}
     >
       {item.src ? (
@@ -47,11 +34,11 @@ const ratioClass = (ratio: GalleryItem["ratio"] | undefined) => {
           alt={item.alt ?? ""}
           width={item.width}
           height={item.height}
-          class="block w-full h-full border border-line object-cover"
+          class="block aspect-square w-full border border-line object-cover"
           loading="lazy"
         />
       ) : (
-        <MediaPlaceholder label={item.title} ratio={item.ratio ?? "square"} />
+        <MediaPlaceholder label={item.title} ratio="square" />
       )}
       <figcaption class="mt-2">
         <p class="text-xs uppercase tracking-wide">{item.title}</p>
@@ -61,26 +48,3 @@ const ratioClass = (ratio: GalleryItem["ratio"] | undefined) => {
   ))}
 </div>
 
-<style>
-  .md\:aspect-3\/4 {
-    aspect-ratio: 3 / 4;
-  }
-  .md\:aspect-1\/1 {
-    aspect-ratio: 1 / 1;
-  }
-  .md\:aspect-16\/10 {
-    aspect-ratio: 16 / 10;
-  }
-
-  @media (min-width: 768px) {
-    .md\:aspect-3\/4 {
-      aspect-ratio: 3 / 4;
-    }
-    .md\:aspect-1\/1 {
-      aspect-ratio: 1 / 1;
-    }
-    .md\:aspect-16\/10 {
-      aspect-ratio: 16 / 10;
-    }
-  }
-</style>
