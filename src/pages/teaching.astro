@@ -6,11 +6,18 @@ import Masthead from "../components/site/Masthead.astro";
 import HairlineSection from "../components/site/HairlineSection.astro";
 import SectionHeadingRow from "../components/site/SectionHeadingRow.astro";
 import Reveal from "../components/site/Reveal.astro";
-import Gallery from "../components/site/Gallery.astro";
+import GalleryGridPattern from "../components/site/GalleryGridPattern.astro";
 import LinkIcon from "../components/site/LinkIcon.astro";
 import Footer from "../components/site/Footer.astro";
 
-const workshops = [
+type Workshop = {
+  org: string;
+  title: string;
+  location: string;
+  desc: string;
+};
+
+const workshops: Workshop[] = [
   {
     org: "Marketing Student Association",
     title: "Data Analytics in Sales and Marketing",
@@ -27,9 +34,30 @@ const workshops = [
 
 // Small gallery for the teaching page — drop in a photo by adding `src` / `alt` to an item.
 const workshopGallery = [
-  { title: "MSA WORKSHOP", caption: "Add a photo — the Data Analytics in Sales and Marketing session." },
-  { title: "MISA WORKSHOP", caption: "Add a photo — the Breaking into Big Tech session." },
-  { title: "IN THE CLASSROOM", caption: "Add a photo — mentoring, office hours, or camp day." },
+  {
+    title: "MSA WORKSHOP",
+    src: "/images/teaching/marketing-association-0.jpg",
+    alt: "Students and presenters gathered for a group photo after the Data Analytics in Sales and Marketing workshop at San Jose State University",
+    width: 4032,
+    height: 3024,
+  },
+  {
+    title: "WORKSHOP ACTIVITY",
+    src: "/images/teaching/marketing-association-1.jpeg",
+    alt: "Panelists answering questions at the Data Analytics in Sales and Marketing workshop, projected slide reading Activity",
+    width: 5184,
+    height: 3456,
+  },
+  {
+    title: "MISA WORKSHOP",
+    src: "/images/teaching/management-information-0.jpg",
+    alt: "Management Information Systems Association Breaking into Big Tech workshop at San Jose State University",
+  },
+  {
+    title: "IN THE CLASSROOM",
+    src: "/images/teaching/management-information-1.jpg",
+    alt: "Classroom session at the Management Information Systems Association Breaking into Big Tech workshop at San Jose State University",
+  },
 ];
 ---
 <Layout title="Teaching — Divyank Shah" description="TA and K-12 mentorship.">
@@ -66,7 +94,7 @@ const workshopGallery = [
       <Reveal><SectionHeadingRow title="Gallery" copy="Photos from the workshops, lectures, and mentoring sessions." /></Reveal>
       <Reveal delay={0.04}>
         <div class="mt-10">
-          <Gallery items={workshopGallery} />
+          <GalleryGridPattern items={workshopGallery} />
         </div>
       </Reveal>
     </HairlineSection>

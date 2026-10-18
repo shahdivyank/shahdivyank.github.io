@@ -1,48 +1,70 @@
 ---
 const year = new Date().getFullYear();
+// Order follows SectionNav.astro, then the remaining pages.
+const pages = [
+  { label: "Experiences", href: "/experiences" },
+  { label: "Research", href: "/research" },
+  { label: "Projects", href: "/projects" },
+  { label: "Music", href: "/music" },
+  { label: "Hackathons", href: "/hackathons" },
+  { label: "Organizations", href: "/organizations" },
+  { label: "Teaching", href: "/teaching" },
+  { label: "Work", href: "/work" },
+];
 ---
 <footer class="w-full bg-ink text-on-ink">
   <div class="gutter grid grid-cols-4 gap-8 border-b border-on-ink/20 py-12 lg:grid-cols-12">
-    <div class="col-span-2 lg:col-span-4">
+    <nav aria-label="Pages" class="col-span-4 lg:col-span-12">
+      <p class="text-xs uppercase tracking-[0.2em] text-on-ink/60">Pages</p>
+      <ul class="mt-4 flex flex-wrap gap-x-6 gap-y-2 text-sm md:justify-between">
+        {pages.map((p) => (
+          <li>
+            <a href={p.href} class="underline-offset-4 hover:underline">{p.label}</a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+    <div class="col-span-2 lg:col-span-8">
       <p class="text-xs uppercase tracking-[0.2em] text-on-ink/60">Follow</p>
       <ul class="mt-4 flex flex-col gap-2 text-sm">
-        <li class="flex flex-wrap items-baseline gap-x-2">
-          <a href="https://github.com/shahdivyank" target="_blank" rel="noopener noreferrer" class="underline-offset-4 hover:underline">GitHub ↗</a>
+        <li class="group flex flex-wrap items-baseline gap-x-2">
+          <a href="https://github.com/shahdivyank" target="_blank" rel="noopener noreferrer" class="underline-offset-4 hover:underline group-hover:underline">GitHub</a>
           <span class="select-all text-on-ink/50">shahdivyank</span>
+          <span aria-hidden="true">↗</span>
         </li>
-        <li class="flex flex-wrap items-baseline gap-x-2">
-          <a href="https://scholar.google.com/citations?user=QP01IqkAAAAJ&hl=en" target="_blank" rel="noopener noreferrer" class="underline-offset-4 hover:underline">Google Scholar ↗</a>
+        <li class="group flex flex-wrap items-baseline gap-x-2">
+          <a href="https://scholar.google.com/citations?user=QP01IqkAAAAJ&hl=en" target="_blank" rel="noopener noreferrer" class="underline-offset-4 hover:underline group-hover:underline">Google Scholar</a>
           <span class="select-all text-on-ink/50">QP01IqkAAAAJ</span>
+          <span aria-hidden="true">↗</span>
         </li>
-        <li class="flex flex-wrap items-baseline gap-x-2">
-          <a href="https://www.linkedin.com/in/divyank-shah/" target="_blank" rel="noopener noreferrer" class="underline-offset-4 hover:underline">LinkedIn ↗</a>
+        <li class="group flex flex-wrap items-baseline gap-x-2">
+          <a href="https://www.linkedin.com/in/divyank-shah/" target="_blank" rel="noopener noreferrer" class="underline-offset-4 hover:underline group-hover:underline">LinkedIn</a>
           <span class="select-all text-on-ink/50">divyank-shah</span>
+          <span aria-hidden="true">↗</span>
+        </li>
+        <li class="group flex flex-wrap items-baseline gap-x-2">
+          <a href="https://www.instagram.com/divyank.shah/" target="_blank" rel="noopener noreferrer" class="underline-offset-4 hover:underline group-hover:underline">Instagram</a>
+          <span class="select-all text-on-ink/50">divyank.shah</span>
+          <span aria-hidden="true">↗</span>
+        </li>
+        <li class="group flex flex-wrap items-baseline gap-x-2">
+          <a href="mailto:shahdivyank25@gmail.com" class="underline-offset-4 hover:underline group-hover:underline">Email</a>
+          <span class="select-all text-on-ink/50">shahdivyank25@gmail.com</span>
+          <span aria-hidden="true">↗</span>
         </li>
       </ul>
     </div>
     <div class="col-span-2 lg:col-span-4">
-      <p class="text-xs uppercase tracking-[0.2em] text-on-ink/60">Enter your e-mail</p>
-      <form class="mt-4 flex max-w-sm border border-on-ink/40" onsubmit="return false">
-        <label for="nl-email" class="sr-only">Email</label>
-        <input id="nl-email" type="email" required placeholder="you@example.com" class="w-full bg-transparent px-3 py-3 text-sm text-on-ink placeholder:text-on-ink/40 focus:outline-none" />
-        <button type="submit" class="shrink-0 bg-on-ink px-4 text-sm text-ink">Subscribe</button>
-      </form>
-    </div>
-    <div class="col-span-4 lg:col-span-4">
-      <p class="text-xs uppercase tracking-[0.2em] text-on-ink/60">Legal</p>
-      <ul class="mt-4 flex gap-4 text-sm">
-        <li><a href="#" class="hover:underline">Privacy</a></li>
-        <li><a href="#" class="hover:underline">Colophon</a></li>
-        <li><a href="#" class="hover:underline">RSS</a></li>
+      <p class="text-xs uppercase tracking-[0.2em] text-on-ink/60">Resume</p>
+      <ul class="mt-4 flex flex-col gap-2 text-sm">
+        <li class="flex flex-wrap items-baseline gap-x-2">
+          <a href="/documents/Divyank_Shah_Resume.pdf" target="_blank" rel="noopener noreferrer" class="underline-offset-4 hover:underline">View PDF ↗</a>
+        </li>
       </ul>
     </div>
   </div>
-  <div class="gutter flex flex-col items-center justify-between gap-3 py-5 text-xs uppercase tracking-[0.15em] md:flex-row">
-    <p>© {year} | Divyank Shah</p>
-    <a href="/" class="underline underline-offset-4">Divyank Shah</a>
-    <a href="#top" class="hover:underline">Subscribe ↗</a>
+  <div class="gutter flex flex-col items-center gap-1 py-5 text-xs uppercase tracking-[0.15em] md:grid md:grid-cols-3">
+    <p class="md:justify-self-start">© {year} | Divyank Shah</p>
+    <a href="/" class="underline underline-offset-4 md:justify-self-center">Divyank Shah</a>
   </div>
 </footer>
-<style>
-  .sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
-</style>

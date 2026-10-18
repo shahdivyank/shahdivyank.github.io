@@ -153,8 +153,8 @@ Rules:
 ### 6.14 Footer
 
 - Full-width `--ink` block, two rows divided by a hairline.
-- Row 1: FOLLOW (social links) / ENTER YOUR E-MAIL (newsletter input) / LEGAL.
-- Row 2: © year | name, centered underlined site name, SUBSCRIBE link.
+- Row 1: PAGES (links to every page) / FOLLOW (social links: GitHub, Google Scholar, LinkedIn, Instagram, e-mail) / RESUME (PDF link).
+- Row 2: © year | name, centered underlined site name.
 - A Spotify "now playing" widget can live here.
 
 ## 7. Motion
@@ -185,12 +185,12 @@ Rules:
 | ----------------------- | -------------------------------------- |
 | Exhibition / Home       | Home (intro, featured projects, stats) |
 | Fashion / Art           | Work (projects and case studies)       |
-| Decoding                | Writing (MDX posts)                    |
-| Beauty / Services       | Uses / Now / Experiments               |
+| Decoding                | Work (case studies)                 |
+| Beauty / Services       | Experiments                           |
 | Shop                    | Resume / Contact                       |
 | Search                  | Command palette (Cmd+K)                |
 | Upcoming events cards   | Featured projects                      |
-| Vertical date accordion | Writing or release timeline            |
+| Vertical date accordion | Release timeline                       |
 | About Us info panels    | Now, Uses, Contact                     |
 
 Replace every placeholder (lorem ipsum, template names, stock photos) with real content. If real content isn't ready yet, use clearly marked placeholders like `[Project title]`, not template text.

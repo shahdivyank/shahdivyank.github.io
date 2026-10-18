@@ -5,7 +5,7 @@ type GalleryItem = {
   src?: string;
   alt?: string;
   title: string;
-  caption: string;
+  caption?: string;
   width?: number;
   height?: number;
   ratio?: "landscape" | "square" | "portrait";
@@ -13,25 +13,45 @@ type GalleryItem = {
 
 interface Props {
   items: GalleryItem[];
+  layout?: "grid" | "masonry";
 }
 
-const { items } = Astro.props;
+const { items, layout = "grid" } = Astro.props;
+
 const matchingHeight = (title: string) => title === "JUDGING" || title === "PARTICIPATING";
 ---
 
-<div class="grid grid-cols-1 gap-x-2 gap-y-4 md:grid-cols-12">
+<div
+  class:list={[
+    "m-0",
+    layout === "masonry"
+      ? [
+          "masonry",
+          "column-count-1",
+          "column-gap-2",
+          "md:column-count-2",
+          "lg:column-count-3",
+          "xl:column-count-4",
+        ]
+      : "grid grid-cols-1 gap-x-2 gap-y-4 md:grid-cols-12",
+  ]}
+>
   {items.map((item) => {
     const isMatching = matchingHeight(item.title);
+    const figureClasses = [
+      "m-0 break-inside-avoid",
+      layout === "masonry"
+        ? [
+            item.title === "JUDGING" ? "md:col-span-7" : item.title === "PARTICIPATING" ? "md:col-span-5" : "md:col-span-4",
+            item.ratio === "square" && "md:col-span-5",
+            item.ratio === "landscape" && "md:col-span-7",
+            isMatching && "md:aspect-7/3",
+          ]
+        : [],
+    ].flat();
+
     return (
-      <figure
-        class:list={[
-          "m-0",
-          item.title === "JUDGING" ? "md:col-span-7" : item.title === "PARTICIPATING" ? "md:col-span-5" : "md:col-span-4",
-          item.ratio === "square" && "md:col-span-5",
-          item.ratio === "landscape" && "md:col-span-7",
-          isMatching && "md:aspect-7/3",
-        ]}
-      >
+      <figure class:list={figureClasses}>
         {item.src ? (
           <img
             src={item.src}
@@ -49,9 +69,47 @@ const matchingHeight = (title: string) => title === "JUDGING" || title === "PART
         )}
         <figcaption class="mt-2">
           <p class="text-xs uppercase tracking-wide">{item.title}</p>
-          <p class="text-sm italic text-ink-muted">{item.caption}</p>
+          {item.caption && <p class="text-sm italic text-ink-muted">{item.caption}</p>}
         </figcaption>
       </figure>
     );
   })}
 </div>
+
+<style>
+  .masonry {
+    column-count: 1;
+    column-gap: 0.5rem;
+    column-fill: auto;
+  }
+
+  .masonry img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  @media (min-width: 768px) {
+    .masonry.column-count-1 {
+      column-count: 1;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .masonry.column-count-2 {
+      column-count: 2;
+    }
+  }
+
+  @media (min-width: 1280px) {
+    .masonry.column-count-3 {
+      column-count: 3;
+    }
+  }
+
+  @media (min-width: 1536px) {
+    .masonry.column-count-4 {
+      column-count: 4;
+    }
+  }
+</style>

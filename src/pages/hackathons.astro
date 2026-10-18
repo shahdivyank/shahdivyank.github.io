@@ -7,7 +7,7 @@ import HairlineSection from "../components/site/HairlineSection.astro";
 import SectionHeadingRow from "../components/site/SectionHeadingRow.astro";
 import Reveal from "../components/site/Reveal.astro";
 import StatsBar from "../components/site/StatsBar.astro";
-import Gallery from "../components/site/Gallery.astro";
+import GalleryGridPattern from "../components/site/GalleryGridPattern.astro";
 import LinkIcon from "../components/site/LinkIcon.astro";
 import Footer from "../components/site/Footer.astro";
 
@@ -108,11 +108,6 @@ const organizedEvents = [
     role: "Software Lead",
     desc: "Led software for DesignVerse 2025.",
   },
-  {
-    event: "FeatureForm 2025",
-    role: "Software Lead",
-    desc: "Led software for FeatureForm 2025.",
-  },
 ];
 
 // Ordered oldest → newest. Same-year tie-break: RoseHack → CitrusHack → CutieHack;
@@ -162,15 +157,81 @@ const judgedProjects = [
 
 // Small per-section galleries — drop in a photo by adding `src` / `alt` to an item.
 const organizedGallery = [
-  { title: "ROSEHACK 2023", caption: "Add a photo — the QR check-in system going live." },
-  { title: "CUTIEHACK 2023", caption: "Add a photo — Aurora and the Discord bot in action." },
-  { title: "ROSEHACK 2024", caption: "Add a photo — Hack Week and federated judging in motion." },
+  {
+    title: "ROSEHACK 2023",
+    src: "/images/hackathons/organized/rosehack-2.jpg",
+    alt: "RoseHack 2023 organizing team posing in front of a balloon arch and handmade Rose Hack arcade cabinet",
+    width: 4032,
+    height: 3024,
+    ratio: "landscape",
+  },
+  {
+    title: "ROSEHACK 2023",
+    src: "/images/hackathons/organized/rosehack-0.jpg",
+    alt: "Three teammates celebrating in front of a tinsel and balloon photo booth",
+    width: 1536,
+    height: 2048,
+    ratio: "square",
+  },
+  {
+    title: "ROSEHACK 2023",
+    src: "/images/hackathons/organized/rosehack-1.jpg",
+    alt: "Two participants sleeping on the floor of the venue overnight",
+    width: 2049,
+    height: 1536,
+  },
+
+  {
+    title: "BEARHACK 2024",
+    src: "/images/hackathons/organized/bearhack-0.jpg",
+    alt: "BearHack organizers grouped together for a photo in a classroom",
+    width: 2048,
+    height: 1536,
+  },
+  {
+    title: "DESIGNVERSE 2025",
+    src: "/images/hackathons/organized/designverse-0.jpg",
+    alt: "Eight DesignVerse teammates standing together inside a café with chalkboard art on the wall",
+    width: 3024,
+    height: 4032,
+  },
+  {
+    title: "DESIGNVERSE 2025",
+    src: "/images/hackathons/organized/designverse-1.jpg",
+    alt: "DesignVerse 2025 organizing team posing together",
+  },
 ];
 
 const judgedGallery = [
   { title: "CUTIEHACK 2025", caption: "Add a photo — reviewing submissions with the judging team." },
   { title: "VIKINGS HACKS 2025", caption: "Add a photo — scoring sheets and judge deliberations." },
   { title: "HACKDAVIS 2026", caption: "Add a photo — announcing the winners on stage." },
+];
+
+const attendedGallery = [
+  {
+    title: "WEAVEHACKS 2",
+    src: "/images/hackathons/attended/weavehacks.HEIC",
+    alt: "CacheFlow project at WeaveHacks 2",
+    caption: "CacheFlow caching / flow optimization helper.",
+  },
+  {
+    title: "FEATUREFORM 2025",
+    src: "/images/hackathons/attended/featureform.HEIC",
+    alt: "Vault MCP project at FeatureForm 2025",
+    caption: "Vault MCP, 3rd place.",
+  },
+  { title: "HACKTECH 2024", caption: "Add a photo — CodeNotes for code, demos, and snippets." },
+  { title: "TREEHACKS 2024", caption: "Add a photo — GitFlow Git workflow visualizer." },
+  { title: "CALHACKS 10.0", caption: "Add a photo — Speech Master, 2nd place." },
+  { title: "CITRUSHACK 2023", caption: "Add a photo — US in R Land playful data / AR experiment, 2nd place." },
+  { title: "ROSEHACK 2022", caption: "Add a photo — Taskmaster task management helper." },
+  { title: "MATADOR HACKS 2019", caption: "Add a photo — Mental Disorder Awareness and support experience." },
+  {
+    title: "TURION SPACE",
+    src: "/images/hackathons/attended/turion-space.HEIC",
+    alt: "Turion Space project photo",
+  },
 ];
 
 // Hackathons / designathons running Aurora (source: ACM@UCR Aurora page — "Used in").
@@ -227,6 +288,11 @@ const hackathonStats = [
           </Reveal>
         ))}
       </div>
+      <Reveal delay={0.04}>
+        <div class="mt-10">
+          <GalleryGridPattern items={attendedGallery} />
+        </div>
+      </Reveal>
     </HairlineSection>
     <HairlineSection>
       <Reveal><SectionHeadingRow title="Judged Projects" copy="Events I've judged — reviewing submissions, scoring projects, and celebrating the winners." /></Reveal>
@@ -243,7 +309,7 @@ const hackathonStats = [
       </div>
       <Reveal delay={0.04}>
         <div class="mt-10">
-          <Gallery items={judgedGallery} />
+          <GalleryGridPattern items={judgedGallery} />
         </div>
       </Reveal>
     </HairlineSection>
@@ -260,11 +326,9 @@ const hackathonStats = [
           </Reveal>
         ))}
       </div>
-      <Reveal delay={0.04}>
-        <div class="mt-10">
-          <Gallery items={organizedGallery} />
-        </div>
-      </Reveal>
+      <div class="mt-10">
+        <GalleryGridPattern items={organizedGallery} />
+      </div>
     </HairlineSection>
     <HairlineSection>
       <Reveal><SectionHeadingRow title="Aurora / Minerva" copy="Things I introduced at one hackathon that are now used across UCR hackathons." /></Reveal>

@@ -1,0 +1,18 @@
+name: Image Optimization
+on:
+    pull_request:
+        branches: [main]
+    push:
+        branches: [main]
+    workflow_dispatch:
+
+jobs:
+    images:
+        name: images
+        runs-on: ubuntu-latest
+
+        steps:
+            - uses: actions/checkout@v4
+            - uses: acm-ucr/images@v2
+              with:
+                  branch: ${{ github.head_ref }}

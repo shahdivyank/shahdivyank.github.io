@@ -1,0 +1,85 @@
+---
+import MediaPlaceholder from "./MediaPlaceholder.astro";
+
+type GalleryItem = {
+  src?: string;
+  alt?: string;
+  title: string;
+  caption?: string;
+  width?: number;
+  height?: number;
+  ratio?: "landscape" | "square" | "portrait";
+};
+
+interface Props {
+  items: GalleryItem[];
+}
+
+const { items = [] } = Astro.props;
+
+const ratioClass = (ratio: GalleryItem["ratio"] | undefined) => {
+  switch (ratio) {
+    case "portrait":
+      return "md:aspect-3/4";
+    case "square":
+      return "md:aspect-1/1";
+    case "landscape":
+    default:
+      return "md:aspect-16/10";
+  }
+};
+---
+
+<div class="grid grid-cols-1 gap-6 md:grid-cols-4 md:gap-8">
+  {items.map((item, index) => (
+    <figure
+      class:list={[
+        "m-0 break-inside-avoid",
+        index === 0 ? "md:col-span-4" : "md:col-span-2",
+        item.ratio === "portrait" ? "md:row-span-2" : null,
+        ratioClass(item.ratio),
+      ]}
+    >
+      {item.src ? (
+        <img
+          src={item.src}
+          alt={item.alt ?? ""}
+          width={item.width}
+          height={item.height}
+          class="block w-full h-full border border-line object-cover"
+          loading="lazy"
+        />
+      ) : (
+        <MediaPlaceholder label={item.title} ratio={item.ratio ?? "landscape"} />
+      )}
+      <figcaption class="mt-2">
+        <p class="text-xs uppercase tracking-wide">{item.title}</p>
+        {item.caption && <p class="text-sm italic text-ink-muted">{item.caption}</p>}
+      </figcaption>
+    </figure>
+  ))}
+</div>
+
+<style>
+  .md\:aspect-3\/4 {
+    aspect-ratio: 3 / 4;
+  }
+  .md\:aspect-1\/1 {
+    aspect-ratio: 1 / 1;
+  }
+  .md\:aspect-16\/10 {
+    aspect-ratio: 16 / 10;
+  }
+
+  @media (min-width: 768px) {
+    .md\:aspect-3\/4 {
+      aspect-ratio: 3 / 4;
+    }
+    .md\:aspect-1\/1 {
+      aspect-ratio: 1 / 1;
+    }
+    .md\:aspect-16\/10 {
+      aspect-ratio: 16 / 10;
+    }
+  }
+</style>
