@@ -213,20 +213,13 @@ const attendedGallery = [
     title: "WEAVEHACKS 2",
     src: "/images/hackathons/attended/weavehacks.HEIC",
     alt: "CacheFlow project at WeaveHacks 2",
-    caption: "CacheFlow caching / flow optimization helper.",
+    ratio: "square",
   },
   {
     title: "FEATUREFORM 2025",
     src: "/images/hackathons/attended/featureform.HEIC",
     alt: "Vault MCP project at FeatureForm 2025",
-    caption: "Vault MCP, 3rd place.",
   },
-  { title: "HACKTECH 2024", caption: "Add a photo — CodeNotes for code, demos, and snippets." },
-  { title: "TREEHACKS 2024", caption: "Add a photo — GitFlow Git workflow visualizer." },
-  { title: "CALHACKS 10.0", caption: "Add a photo — Speech Master, 2nd place." },
-  { title: "CITRUSHACK 2023", caption: "Add a photo — US in R Land playful data / AR experiment, 2nd place." },
-  { title: "ROSEHACK 2022", caption: "Add a photo — Taskmaster task management helper." },
-  { title: "MATADOR HACKS 2019", caption: "Add a photo — Mental Disorder Awareness and support experience." },
   {
     title: "TURION SPACE",
     src: "/images/hackathons/attended/turion-space.HEIC",
@@ -290,7 +283,7 @@ const hackathonStats = [
       </div>
       <Reveal delay={0.04}>
         <div class="mt-10">
-          <GalleryGridPattern items={attendedGallery} />
+          <GalleryGridPattern items={attendedGallery} columns={3} />
         </div>
       </Reveal>
     </HairlineSection>
@@ -307,11 +300,6 @@ const hackathonStats = [
           </Reveal>
         ))}
       </div>
-      <Reveal delay={0.04}>
-        <div class="mt-10">
-          <GalleryGridPattern items={judgedGallery} />
-        </div>
-      </Reveal>
     </HairlineSection>
     <HairlineSection>
       <Reveal><SectionHeadingRow title="Organized Hackathons" copy="Events I've led as software lead — from QR check-in and Aurora to Hack Week and federated judging." /></Reveal>

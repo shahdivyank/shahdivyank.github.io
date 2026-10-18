@@ -13,9 +13,10 @@ type GalleryItem = {
 
 interface Props {
   items: GalleryItem[];
+  columns?: 3 | 4;
 }
 
-const { items = [] } = Astro.props;
+const { items = [], columns = 4 } = Astro.props;
 
 const ratioClass = (ratio: GalleryItem["ratio"] | undefined) => {
   switch (ratio) {
@@ -30,12 +31,13 @@ const ratioClass = (ratio: GalleryItem["ratio"] | undefined) => {
 };
 ---
 
-<div class="grid grid-cols-1 gap-6 md:grid-cols-4 md:gap-8">
+<div class={`grid grid-cols-1 gap-6 md:grid-cols-${columns} md:gap-8`}>
   {items.map((item, index) => (
     <figure
       class:list={[
         "m-0 break-inside-avoid",
-        index === 0 ? "md:col-span-4" : "md:col-span-2",
+        columns === 4 && index === 0 ? "md:col-span-4" : null,
+        columns === 4 && index !== 0 ? "md:col-span-2" : null,
         item.ratio === "portrait" ? "md:row-span-2" : null,
         ratioClass(item.ratio),
       ]}
